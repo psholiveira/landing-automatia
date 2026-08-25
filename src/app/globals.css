@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ground text-ink antialiased;
+  }
+  * {
+    text-wrap: pretty;
+  }
+  ::selection {
+    @apply bg-brand text-white;
+  }
+  :focus-visible {
+    outline: 2px solid #1a73c8;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* rótulo mono usado em todos os kickers de seção */
+  .kicker {
+    @apply font-mono text-[13px] tracking-[0.2em];
+  }
+  /* container padrão de seção */
+  .shell {
+    @apply mx-auto w-full max-w-[1400px] px-10;
+  }
+}
