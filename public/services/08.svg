@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2100" height="2700" viewBox="0 0 700 900">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="700" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0b2a5b"/>
+      <stop offset="1" stop-color="#1a73c8"/>
+    </linearGradient>
+  </defs>
+  <rect width="700" height="900" fill="url(#g)"/>
+  <line x1="116.66666666666667" y1="0" x2="116.66666666666667" y2="900" stroke="#ffffff" stroke-opacity="0.08" stroke-width="2"/>
+  <line x1="233.33333333333334" y1="0" x2="233.33333333333334" y2="900" stroke="#ffffff" stroke-opacity="0.08" stroke-width="2"/>
+  <line x1="350" y1="0" x2="350" y2="900" stroke="#ffffff" stroke-opacity="0.08" stroke-width="2"/>
+  <line x1="466.6666666666667" y1="0" x2="466.6666666666667" y2="900" stroke="#ffffff" stroke-opacity="0.08" stroke-width="2"/>
+  <line x1="583.3333333333334" y1="0" x2="583.3333333333334" y2="900" stroke="#ffffff" stroke-opacity="0.08" stroke-width="2"/>
+  <text x="56" y="104" font-family="ui-monospace, 'IBM Plex Mono', monospace" font-size="64" font-weight="800" fill="#6fabe8" opacity="0.95">08</text>
+  <g transform="translate(392,-7.5) scale(0.42)" opacity="0.92">
+    <circle cx="400" cy="345" r="70" fill="none" stroke="#ffffff" stroke-width="8"/>
+    <path d="M372 340 L392 360 L428 320" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+    <rect x="375" y="408" width="50" height="30" rx="8" fill="none" stroke="#ffffff" stroke-width="8"/>
+    <line x1="400" y1="248" x2="400" y2="222" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+    <line x1="452" y1="270" x2="472" y2="252" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+    <line x1="348" y1="270" x2="328" y2="252" stroke="#ffffff" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <text x="56" y="280" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="46" font-weight="800" fill="#ffffff" opacity="1"><tspan x="56" dy="0">Consultoria de IA</tspan></text>
+  <text x="56" y="330" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="26" font-weight="500" fill="#ffffff" opacity="0.82"><tspan x="56" dy="0">Onde a IA dá retorno no seu negócio e onde</tspan><tspan x="56" dy="38">é só custo. Dizemos os dois.</tspan></text>
+  <rect x="4" y="4" width="692" height="892" fill="none" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"/>
+</svg>

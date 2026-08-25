@@ -1,5 +1,29 @@
+import { statSync } from "node:fs";
+import { join } from "node:path";
 import Reveal from "./Reveal";
 import { servicos } from "@/content/site";
+import { CircularGallery, type GalleryItem } from "@/components/ui/circular-gallery-2";
+
+/**
+ * A galeria carrega as imagens via `new Image()` direto no navegador, fora do
+ * pipeline de assets do Next — sem um cache-buster, trocar o SVG em disco não
+ * invalida o cache HTTP do navegador e a imagem antiga continua aparecendo.
+ * A versão é o mtime do arquivo, então regenerar o card já muda a URL sozinho.
+ */
+function assetVersion(publicPath: string) {
+  try {
+    return statSync(join(process.cwd(), "public", publicPath)).mtimeMs.toString(36);
+  } catch {
+    return "0";
+  }
+}
+
+// Número, nome e descrição já vêm desenhados dentro da própria imagem
+// (veja scripts/gen-service-cards.mjs), por isso não repetimos legenda aqui.
+const galleryItems: GalleryItem[] = servicos.itens.map((s) => ({
+  image: `${s.imagem}?v=${assetVersion(s.imagem)}`,
+  text: "",
+}));
 
 export default function Servicos() {
   return (
@@ -18,22 +42,12 @@ export default function Servicos() {
         </div>
       </div>
 
-      <div className="shell">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {servicos.itens.map((s, i) => (
-            <Reveal key={s.n} y={60} duration={0.85} delay={(i % 3) * 0.08} className="border-b-2 border-r border-rule">
-              {/* o lift do hover vive num filho: o wrapper do Reveal tem transform do GSAP */}
-              <div className="flex h-full flex-col gap-4 pb-[52px] pr-10 pt-11 transition-transform duration-200 hover:-translate-y-1 hover:bg-surface">
-                <div className="flex items-baseline gap-3.5">
-                  <span className="font-mono text-[13px] text-brand">{s.n}</span>
-                  <span className="h-0.5 flex-1 bg-brand/35" />
-                </div>
-                <h3 className="m-0 pr-6 text-[32px] font-extrabold leading-[1.02] tracking-[-0.025em]">{s.nome}</h3>
-                <p className="m-0 pr-10 text-[17px] leading-[1.45] text-ash">{s.desc}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+      <Reveal y={40} className="relative h-[620px] w-full">
+        <CircularGallery items={galleryItems} bend={3} borderRadius={0.04} scrollEase={0.04} />
+      </Reveal>
+
+      <div className="shell pb-11 pt-6">
+        <p className="kicker text-smoke">ARRASTE OU USE O SCROLL PARA NAVEGAR</p>
       </div>
     </section>
   );

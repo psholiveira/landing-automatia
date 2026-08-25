@@ -86,7 +86,6 @@ src/
     Navbar.tsx           navbar em dock flutuante
     MenuOverlay.tsx       menu cinético em tela cheia
     Hero.tsx              hero + barra de números
-    Marquee.tsx            faixa azul rolando
     Servicos.tsx            grade de 9 serviços
     AntesDepois.tsx          comparativo em duas colunas
     Agentes.tsx               seção azul + simulação de chat

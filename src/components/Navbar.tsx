@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useTransform, type MotionValue } from "framer-motion";
 import { Bot, LayoutGrid, Route, type LucideIcon } from "lucide-react";
 import { navLinks } from "@/content/site";
 import { Dock, DockItem } from "@/components/ui/dock";
 import { cn } from "@/lib/utils";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import MenuOverlay from "./MenuOverlay";
 
 const PANEL_HEIGHT = 56;
@@ -32,7 +33,7 @@ function Logo() {
         width={727}
         height={169}
         priority
-        className="h-9 w-auto object-contain"
+        className="h-7 w-auto object-contain"
       />
     </a>
   );
@@ -67,10 +68,26 @@ function DockMenuButton({
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = headerRef.current;
+    if (!el || prefersReducedMotion()) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        el,
+        { y: -32, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: "power4.out", delay: 0.15 }
+      );
+    }, el);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <>
-      <header className="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
+      <header ref={headerRef} className="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
         <Dock
           align="start"
           panelHeight={PANEL_HEIGHT}

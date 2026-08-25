@@ -42,24 +42,21 @@ export const stats = [
   { valor: 2, sufixo: " sem", rotulo: "ATÉ O 1º ENTREGÁVEL" },
 ];
 
-export const marqueeText =
-  "APLICAÇÕES ESCALÁVEIS · AUTOMAÇÕES COM IA · AGENTES DE IA · LANDING PAGES · SISTEMAS SOB MEDIDA · INTEGRAÇÕES E APIS · DASHBOARDS E BI · CONSULTORIA DE IA · ";
-
 export const servicos = {
   kicker: "01 — O QUE FAZEMOS",
   titulo: ["Nove frentes.", "Um objetivo: escala."],
   intro:
     "Da landing page que converte ao sistema que sustenta a operação inteira. Você contrata o resultado, não a tecnologia — a escolha da stack é problema nosso.",
   itens: [
-    { n: "01", nome: "Aplicações escaláveis", desc: "Arquitetura que aguenta crescer: dez ou dez mil usuários, mesma resposta." },
-    { n: "02", nome: "Automações com IA", desc: "O trabalho repetitivo sai da mão do time e passa a rodar sozinho, com registro de tudo." },
-    { n: "03", nome: "Agentes de IA e chatbots", desc: "Atendimento e qualificação de lead 24/7, treinados no seu produto e no seu tom." },
-    { n: "04", nome: "Landing pages de alta conversão", desc: "Estrutura e copy desenhadas para vender, não para ganhar prêmio de design." },
-    { n: "05", nome: "Sistemas sob medida", desc: "Quando nenhum SaaS encaixa: o software se molda ao seu processo, não o contrário." },
-    { n: "06", nome: "Integrações e APIs", desc: "ERP, CRM, WhatsApp, pagamentos e planilhas conversando sem ninguém no meio." },
-    { n: "07", nome: "Dashboards e BI", desc: "Um número por decisão, atualizado em tempo real — fim do relatório de sexta à noite." },
-    { n: "08", nome: "Consultoria de IA", desc: "Onde a IA dá retorno no seu negócio e onde é só custo. Dizemos os dois." },
-    { n: "09", nome: "Manutenção e sustentação", desc: "Monitoramos, corrigimos e evoluímos o que está no ar. Sem abandono pós-entrega." },
+    { n: "01", nome: "Aplicações escaláveis", desc: "Arquitetura que aguenta crescer: dez ou dez mil usuários, mesma resposta.", imagem: "/services/01.svg" },
+    { n: "02", nome: "Automações com IA", desc: "O trabalho repetitivo sai da mão do time e passa a rodar sozinho, com registro de tudo.", imagem: "/services/02.svg" },
+    { n: "03", nome: "Agentes de IA e chatbots", desc: "Atendimento e qualificação de lead 24/7, treinados no seu produto e no seu tom.", imagem: "/services/03.svg" },
+    { n: "04", nome: "Landing pages de alta conversão", desc: "Estrutura e copy desenhadas para vender, não para ganhar prêmio de design.", imagem: "/services/04.svg" },
+    { n: "05", nome: "Sistemas sob medida", desc: "Quando nenhum SaaS encaixa: o software se molda ao seu processo, não o contrário.", imagem: "/services/05.svg" },
+    { n: "06", nome: "Integrações e APIs", desc: "ERP, CRM, WhatsApp, pagamentos e planilhas conversando sem ninguém no meio.", imagem: "/services/06.svg" },
+    { n: "07", nome: "Dashboards e BI", desc: "Um número por decisão, atualizado em tempo real — fim do relatório de sexta à noite.", imagem: "/services/07.svg" },
+    { n: "08", nome: "Consultoria de IA", desc: "Onde a IA dá retorno no seu negócio e onde é só custo. Dizemos os dois.", imagem: "/services/08.svg" },
+    { n: "09", nome: "Manutenção e sustentação", desc: "Monitoramos, corrigimos e evoluímos o que está no ar. Sem abandono pós-entrega.", imagem: "/services/09.svg" },
   ],
 };
 

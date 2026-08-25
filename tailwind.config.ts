@@ -22,11 +22,9 @@ const config: Config = {
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       keyframes: {
-        marquee: { from: { transform: "translateX(0)" }, to: { transform: "translateX(-50%)" } },
         blink: { "0%,49%": { opacity: "1" }, "50%,100%": { opacity: "0" } },
       },
       animation: {
-        marquee: "marquee 34s linear infinite",
         blink: "blink 1.4s steps(1) infinite",
       },
       borderRadius: { none: "0px" },

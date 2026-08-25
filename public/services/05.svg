@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2100" height="2700" viewBox="0 0 700 900">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="700" y2="900" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0b2a5b"/>
+      <stop offset="1" stop-color="#1a73c8"/>
+    </linearGradient>
+  </defs>
+  <rect width="700" height="900" fill="url(#g)"/>
+  <line x1="116.66666666666667" y1="0" x2="116.66666666666667" y2="900" stroke="#ffffff" stroke-opacity="0.08" stroke-width="2"/>
+  <line x1="233.33333333333334" y1="0" x2="233.33333333333334" y2="900" stroke="#ffffff" stroke-opacity="0.08" stroke-width="2"/>
+  <line x1="350" y1="0" x2="350" y2="900" stroke="#ffffff" stroke-opacity="0.08" stroke-width="2"/>
+  <line x1="466.6666666666667" y1="0" x2="466.6666666666667" y2="900" stroke="#ffffff" stroke-opacity="0.08" stroke-width="2"/>
+  <line x1="583.3333333333334" y1="0" x2="583.3333333333334" y2="900" stroke="#ffffff" stroke-opacity="0.08" stroke-width="2"/>
+  <text x="56" y="104" font-family="ui-monospace, 'IBM Plex Mono', monospace" font-size="64" font-weight="800" fill="#6fabe8" opacity="0.95">05</text>
+  <g transform="translate(392,-7.5) scale(0.42)" opacity="0.92">
+      <circle cx="400" cy="380" r="70" fill="none" stroke="#ffffff" stroke-width="8"/>
+      <rect x="478" y="368" width="24" height="24" rx="4" fill="#ffffff" transform="rotate(0 490 380)"/><rect x="451.6396103067893" y="431.6396103067893" width="24" height="24" rx="4" fill="#ffffff" transform="rotate(45 463.6396103067893 443.6396103067893)"/><rect x="388" y="458" width="24" height="24" rx="4" fill="#ffffff" transform="rotate(90 400 470)"/><rect x="324.3603896932107" y="431.6396103067893" width="24" height="24" rx="4" fill="#ffffff" transform="rotate(135 336.3603896932107 443.6396103067893)"/><rect x="298" y="368" width="24" height="24" rx="4" fill="#ffffff" transform="rotate(180 310 380)"/><rect x="324.3603896932107" y="304.3603896932107" width="24" height="24" rx="4" fill="#ffffff" transform="rotate(225 336.3603896932107 316.3603896932107)"/><rect x="388" y="278" width="24" height="24" rx="4" fill="#ffffff" transform="rotate(270 400 290)"/><rect x="451.6396103067893" y="304.3603896932107" width="24" height="24" rx="4" fill="#ffffff" transform="rotate(315 463.6396103067893 316.3603896932107)"/>
+      <circle cx="400" cy="380" r="46" fill="#0b2a5b" stroke="#ffffff" stroke-width="8"/>
+    </g>
+  <text x="56" y="280" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="46" font-weight="800" fill="#ffffff" opacity="1"><tspan x="56" dy="0">Sistemas sob medida</tspan></text>
+  <text x="56" y="330" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="26" font-weight="500" fill="#ffffff" opacity="0.82"><tspan x="56" dy="0">Quando nenhum SaaS encaixa: o software se</tspan><tspan x="56" dy="38">molda ao seu processo, não o contrário.</tspan></text>
+  <rect x="4" y="4" width="692" height="892" fill="none" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"/>
+</svg>
