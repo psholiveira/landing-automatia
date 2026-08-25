@@ -461,6 +461,8 @@ class App {
   boundOnTouchDown!: (e: MouseEvent | TouchEvent) => void;
   boundOnTouchMove!: (e: MouseEvent | TouchEvent) => void;
   boundOnTouchUp!: () => void;
+  isVisible: boolean = true;
+  visibilityObserver!: IntersectionObserver;
 
   constructor(
     container: HTMLElement,
@@ -632,7 +634,9 @@ class App {
     }
     this.renderer.render({ scene: this.scene, camera: this.camera });
     this.scroll.last = this.scroll.current;
-    this.raf = window.requestAnimationFrame(this.update);
+    // Só continua o loop enquanto a galeria estiver visível: evita renderizar
+    // WebGL indefinidamente para uma seção fora da tela.
+    if (this.isVisible) this.raf = window.requestAnimationFrame(this.update);
   }
 
   addEventListeners() {
@@ -651,10 +655,23 @@ class App {
     this.container.addEventListener("touchstart", this.boundOnTouchDown);
     window.addEventListener("touchmove", this.boundOnTouchMove);
     window.addEventListener("touchend", this.boundOnTouchUp);
+
+    this.visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        this.isVisible = entry.isIntersecting;
+        if (this.isVisible) {
+          window.cancelAnimationFrame(this.raf);
+          this.raf = window.requestAnimationFrame(this.update);
+        }
+      },
+      { threshold: 0 },
+    );
+    this.visibilityObserver.observe(this.container);
   }
 
   destroy() {
     window.cancelAnimationFrame(this.raf);
+    this.visibilityObserver?.disconnect();
     window.removeEventListener("resize", this.boundOnResize);
     window.removeEventListener("mousewheel", this.boundOnWheel as EventListener);
     window.removeEventListener("wheel", this.boundOnWheel);

@@ -13,6 +13,9 @@ export default function Hero() {
     if (!el || prefersReducedMotion()) return;
     const q = (s: string) => Array.from(el.querySelectorAll(s));
 
+    let glowLoop: gsap.core.Tween | undefined;
+    let observer: IntersectionObserver | undefined;
+
     const ctx = gsap.context(() => {
       gsap
         .timeline({ defaults: { ease: "power4.out" } })
@@ -22,7 +25,18 @@ export default function Hero() {
         .fromTo(q("[data-cta]"), { y: 28 }, { y: 0, opacity: 1, duration: 0.8 }, 0.65)
         .to(q("[data-grid]"), { opacity: 1, duration: 1.4 }, 0.1);
 
-      gsap.to(q("[data-glow]"), { y: 60, x: -40, scale: 1.12, duration: 9, repeat: -1, yoyo: true, ease: "sine.inOut" });
+      // Loop infinito: pausado enquanto o herói está fora da viewport, para não
+      // gastar CPU/GPU com uma seção que o usuário nem está vendo.
+      glowLoop = gsap.to(q("[data-glow]"), {
+        y: 60,
+        x: -40,
+        scale: 1.12,
+        duration: 9,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        paused: true,
+      });
       gsap.to(q("[data-glow]"), {
         yPercent: 30,
         ease: "none",
@@ -30,7 +44,19 @@ export default function Hero() {
       });
     }, el);
 
-    return () => ctx.revert();
+    observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) glowLoop?.play();
+        else glowLoop?.pause();
+      },
+      { threshold: 0 }
+    );
+    observer.observe(el);
+
+    return () => {
+      observer?.disconnect();
+      ctx.revert();
+    };
   }, []);
 
   return (
