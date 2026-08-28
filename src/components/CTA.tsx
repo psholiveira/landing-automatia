@@ -21,10 +21,10 @@ export default function CTA() {
 
           <Reveal className="flex flex-col gap-4">
             <a
-              href={contato.whatsapp}
+              href={contato.emailHref}
               className="flex items-center justify-between gap-5 bg-white px-7 py-[26px] text-2xl font-extrabold tracking-[-0.015em] text-navy transition-colors hover:bg-sky"
             >
-              WhatsApp {contato.telefone} <span className="font-mono font-normal">→</span>
+              {contato.email} <span className="font-mono font-normal">→</span>
             </a>
             <a
               href={contato.instagram}

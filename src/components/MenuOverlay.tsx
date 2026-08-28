@@ -169,8 +169,8 @@ export default function MenuOverlay({ open, onClose }: { open: boolean; onClose:
           <div data-fade className="flex shrink-0 flex-wrap items-end justify-between gap-10 border-t-2 border-white/40 pt-[clamp(16px,2.4vh,26px)] opacity-0">
             <div className="flex flex-col gap-1.5">
               <span className="font-mono text-xs tracking-[0.16em] text-skyMuted">DIAGNÓSTICO GRATUITO</span>
-              <a href={contato.whatsapp} className="text-[clamp(21px,3vh,30px)] font-extrabold tracking-[-0.02em] text-white transition-colors hover:text-sky">
-                WhatsApp {contato.telefone}
+              <a href={contato.emailHref} className="text-[clamp(21px,3vh,30px)] font-extrabold tracking-[-0.02em] text-white transition-colors hover:text-sky">
+                {contato.email}
               </a>
             </div>
             <a href={contato.instagram} className="font-mono text-[13px] tracking-[0.14em] text-white transition-colors hover:text-sky">

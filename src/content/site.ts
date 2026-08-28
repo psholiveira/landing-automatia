@@ -4,10 +4,10 @@
  */
 
 export const contato = {
-  telefone: "(83) 99109-5619",
-  whatsapp: "https://wa.me/5583991095619",
-  instagram: "https://www.instagram.com/",
-  handle: "@automatia",
+  email: "automatiabr@gmail.com",
+  emailHref: "mailto:automatiabr@gmail.com",
+  instagram: "https://www.instagram.com/_automatia/",
+  handle: "@_automatia",
 };
 
 export const navLinks = [
@@ -21,8 +21,7 @@ export const menuLinks = [
   { n: "01", rotulo: "Serviços", href: "#servicos" },
   { n: "02", rotulo: "Automações com IA", href: "#agentes" },
   { n: "03", rotulo: "Método", href: "#metodo" },
-  { n: "04", rotulo: "Cases", href: "#case" },
-  { n: "05", rotulo: "Falar com a gente", href: "#contato" },
+  { n: "04", rotulo: "Falar com a gente", href: "#contato" },
 ];
 
 export const hero = {
@@ -107,18 +106,6 @@ export const metodo = {
     { n: "ETAPA 03", titulo: "CONSTRUÇÃO", texto: "Entregas semanais funcionando de verdade, em ambiente real — não slides de status." },
     { n: "ETAPA 04", titulo: "OPERAÇÃO", texto: "Monitoramos, ajustamos e escalamos junto com a sua demanda. O sistema continua vivo." },
   ],
-};
-
-/** TODO: substituir pelo case real antes de publicar */
-export const caseCliente = {
-  kicker: "05 — CASE 01",
-  /** primeira parte da citação, destacada em azul */
-  destaque: "Cole aqui a frase do cliente",
-  /** o resto da citação, em tinta */
-  resto: " — uma linha sobre o que mudou depois que o processo passou a rodar sozinho.",
-  autor: "Nome do cliente · Cargo, Empresa",
-  imagem: "", // caminho em /public, ex: "/case-01.jpg"
-  imagemAlt: "Resultado do projeto",
 };
 
 export const cta = {
