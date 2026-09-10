@@ -3,28 +3,49 @@
 import { useEffect, useState } from "react";
 import { CircularGallery, type GalleryItem } from "@/components/ui/circular-gallery-2";
 
-const DESKTOP = "(min-width: 1024px)";
+/** Largura de referência em que `bend: 3` foi calibrado. */
+const LARGURA_BASE = 1440;
+const BEND_BASE = 3;
 
 /**
- * A galeria circular é WebGL e dimensiona os cards a partir da ALTURA do
- * container (ver Media.onResize no vendor) — num celular os cards ficariam
- * pequenos demais para o texto desenhado dentro deles ser lido. Por isso ela
- * só é montada no desktop; no mobile o Servicos renderiza um carrossel HTML
- * com o mesmo conteúdo. Montar condicionalmente (em vez de esconder por CSS)
- * evita subir um contexto WebGL inútil no celular.
+ * A curvatura da galeria é medida contra a metade da largura do viewport 3D
+ * (ver `H = viewport.width / 2` no vendor), que encolhe junto com a tela. Um
+ * `bend` fixo, portanto, vira um arco muito mais fechado no celular do que no
+ * desktop. Escalando o bend com a largura, o arco mantém a MESMA proporção em
+ * qualquer tela — o tamanho dos cards em pixels já é idêntico, porque depende
+ * só da altura do container (700x900 * altura/1500).
+ *
+ * O valor é arredondado em degraus de 0.25 porque trocá-lo remonta o contexto
+ * WebGL: assim um resize contínuo não fica recriando a galeria a cada frame.
  */
+function bendPara(largura: number) {
+  const bruto = (BEND_BASE * largura) / LARGURA_BASE;
+  return Math.max(0.75, Math.round(bruto * 4) / 4);
+}
+
 export default function ServicosGaleria({ items }: { items: GalleryItem[] }) {
-  const [desktop, setDesktop] = useState(false);
+  const [bend, setBend] = useState(BEND_BASE);
 
   useEffect(() => {
-    const mq = window.matchMedia(DESKTOP);
-    const sync = () => setDesktop(mq.matches);
+    const sync = () => setBend(bendPara(window.innerWidth));
     sync();
-    mq.addEventListener("change", sync);
-    return () => mq.removeEventListener("change", sync);
+    window.addEventListener("resize", sync);
+    window.addEventListener("orientationchange", sync);
+    return () => {
+      window.removeEventListener("resize", sync);
+      window.removeEventListener("orientationchange", sync);
+    };
   }, []);
 
-  if (!desktop) return null;
-
-  return <CircularGallery items={items} bend={3} borderRadius={0.04} scrollEase={0.04} />;
+  return (
+    <CircularGallery
+      items={items}
+      bend={bend}
+      borderRadius={0.04}
+      scrollEase={0.04}
+      // deixa a rolagem vertical da página com o navegador e o arrasto
+      // horizontal com a galeria, em vez dos dois disputarem o mesmo gesto
+      className="touch-pan-y"
+    />
+  );
 }

@@ -45,39 +45,14 @@ export default function Servicos() {
         </div>
       </div>
 
-      {/* Mobile/tablet: carrossel HTML com snap — legível e com rolagem nativa. */}
-      <div className="lg:hidden">
-        <div className="snap-row px-5 pb-4 pt-8 sm:px-8 sm:pt-10">
-          {servicos.itens.map((s) => (
-            <article
-              key={s.n}
-              className="flex min-h-[300px] w-[76vw] max-w-[300px] shrink-0 snap-center flex-col justify-between border-2 border-ink bg-gradient-to-br from-navy to-brand p-6 text-white sm:min-h-[330px] sm:w-[60vw]"
-            >
-              <div className="font-mono text-[40px] font-extrabold leading-none text-sky/95 sm:text-[52px]">{s.n}</div>
-              <div className="flex flex-col gap-2.5">
-                <h3 className="m-0 text-[24px] font-extrabold leading-[1.02] tracking-[-0.03em] sm:text-[28px]">
-                  {s.nome}
-                </h3>
-                <p className="m-0 text-[14px] font-medium leading-[1.4] text-white/80 sm:text-[15px]">{s.desc}</p>
-              </div>
-            </article>
-          ))}
-          <span aria-hidden className="w-1 shrink-0" />
-        </div>
-        <div className="shell pb-9 pt-1">
-          <p className="kicker text-smoke">ARRASTE PARA O LADO PARA VER TODOS</p>
-        </div>
+      <Reveal y={40} className="relative h-[620px] w-full">
+        <ServicosGaleria items={galleryItems} />
+      </Reveal>
+
+      <div className="shell pb-9 pt-5 lg:pb-11 lg:pt-6">
+        <p className="kicker text-smoke">ARRASTE OU USE O SCROLL PARA NAVEGAR</p>
       </div>
 
-      {/* Desktop: galeria circular em WebGL. */}
-      <div className="hidden lg:block">
-        <Reveal y={40} className="relative h-[620px] w-full">
-          <ServicosGaleria items={galleryItems} />
-        </Reveal>
-        <div className="shell pb-11 pt-6">
-          <p className="kicker text-smoke">ARRASTE OU USE O SCROLL PARA NAVEGAR</p>
-        </div>
-      </div>
     </section>
   );
 }
