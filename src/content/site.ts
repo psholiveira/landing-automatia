@@ -6,9 +6,16 @@
 /** URL canônica do site em produção (sem barra no final). */
 export const siteUrl = "https://www.automatia.company";
 
+/** O wa.me exige o número em E.164, sem "+" nem pontuação. */
+const whatsappNumero = "5583920036170";
+/** Mensagem que já chega digitada na conversa — o mesmo pedido do CTA principal. */
+const whatsappTexto = "Olá! Vim pelo site e quero um diagnóstico gratuito.";
+
 export const contato = {
   email: "automatiabr@gmail.com",
   emailHref: "mailto:automatiabr@gmail.com",
+  telefone: "(83) 92003-6170",
+  whatsapp: `https://wa.me/${whatsappNumero}?text=${encodeURIComponent(whatsappTexto)}`,
   instagram: "https://www.instagram.com/_automatia/",
   handle: "@_automatia",
 };

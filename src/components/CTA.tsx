@@ -33,6 +33,13 @@ export default function CTA() {
               <span className="font-mono font-normal">→</span>
             </a>
             <a
+              href={contato.whatsapp}
+              className="flex items-center justify-between gap-3 border-2 border-white/45 px-[18px] py-[18px] text-[15px] font-semibold text-white transition-colors hover:border-white hover:bg-white/10 sm:gap-5 sm:px-[26px] sm:py-6 sm:text-lg lg:text-xl"
+            >
+              <span className="min-w-0 break-words">WhatsApp {contato.telefone}</span>
+              <span className="font-mono font-normal">→</span>
+            </a>
+            <a
               href={contato.instagram}
               className="flex items-center justify-between gap-3 border-2 border-white/45 px-[18px] py-[18px] text-[15px] font-semibold text-white transition-colors hover:border-white hover:bg-white/10 sm:gap-5 sm:px-[26px] sm:py-6 sm:text-lg lg:text-xl"
             >
