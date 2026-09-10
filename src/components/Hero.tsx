@@ -61,7 +61,7 @@ export default function Hero() {
 
   return (
     <header ref={root} id="topo" className="relative overflow-hidden border-b-2 border-ink bg-navy text-white">
-      <div data-grid className="pointer-events-none absolute inset-0 grid grid-cols-3 opacity-0 sm:grid-cols-6">
+      <div data-grid className="pointer-events-none absolute inset-0 grid grid-cols-3 entra sm:grid-cols-6">
         {Array.from({ length: 5 }).map((_, i) => (
           <div key={i} className={"border-r border-white/10" + (i > 1 ? " hidden sm:block" : "")} />
         ))}
@@ -73,7 +73,7 @@ export default function Hero() {
       />
 
       <div className="shell relative pt-[92px] sm:pt-[104px] lg:pt-[110px]">
-        <div data-kicker className="mb-7 flex items-start gap-3 opacity-0 sm:mb-11 sm:items-center sm:gap-3.5">
+        <div data-kicker className="mb-7 flex items-start gap-3 entra sm:mb-11 sm:items-center sm:gap-3.5">
           <span className="mt-[5px] h-2 w-2 shrink-0 animate-blink bg-sky sm:mt-0 sm:h-[9px] sm:w-[9px]" />
           <span className="kicker text-skyMuted">{hero.kicker}</span>
         </div>
@@ -94,10 +94,10 @@ export default function Hero() {
         </h1>
 
         <div className="mt-10 grid grid-cols-1 items-end gap-10 pb-14 sm:mt-14 lg:mt-16 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:pb-[72px]">
-          <p data-sub className="m-0 max-w-[620px] text-[17px] font-medium leading-[1.4] text-white/80 opacity-0 sm:text-xl lg:text-2xl lg:leading-[1.35]">
+          <p data-sub className="m-0 max-w-[620px] text-[17px] font-medium leading-[1.4] text-white/80 entra sm:text-xl lg:text-2xl lg:leading-[1.35]">
             {hero.subtitulo}
           </p>
-          <div data-cta className="flex flex-col gap-3.5 opacity-0 sm:gap-[18px]">
+          <div data-cta className="flex flex-col gap-3.5 entra sm:gap-[18px]">
             <a
               href="#contato"
               className="flex items-center justify-between gap-4 bg-white px-5 py-5 text-[16px] font-extrabold tracking-[-0.01em] text-navy transition-colors hover:bg-sky sm:gap-5 sm:px-7 sm:py-6 sm:text-[21px]"

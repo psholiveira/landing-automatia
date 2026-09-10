@@ -114,3 +114,16 @@ export const cta = {
   texto:
     "Uma conversa de 30 minutos, sem custo: mapeamos onde o tempo está vazando e dizemos o que dá para automatizar primeiro — mesmo que não seja com a gente.",
 };
+
+/** Página 404 — rotas que não existem */
+export const naoEncontrada = {
+  codigo: "404",
+  kicker: "ERRO 404 · ROTA NÃO ENCONTRADA",
+  linhas: ["Essa página"],
+  linhaDestaque: "não existe.",
+  texto:
+    "O endereço pode ter mudado de lugar ou nunca ter existido. O resto do site continua rodando normalmente — os agentes inclusive.",
+  ctaPrimario: "Voltar para o início",
+  ctaSecundario: "Falar com a gente",
+  atalhos: "OU VÁ DIRETO PARA",
+};

@@ -38,6 +38,20 @@
   .section-y {
     @apply py-[72px] sm:py-24 lg:py-[110px];
   }
+  /*
+   * Elementos que nascem invisíveis e só aparecem quando a timeline do GSAP
+   * roda. Como as timelines não rodam sob prefers-reduced-motion, sem isto a
+   * página ficaria com buracos permanentes para quem pede menos movimento.
+   */
+  .entra {
+    @apply opacity-0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .entra {
+      @apply opacity-100;
+    }
+  }
+
   /* carrossel horizontal com snap — usado no mobile */
   .snap-row {
     @apply flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none];
