@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
+import { siteUrl } from "@/content/site";
+
 const archivo = Archivo({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -17,12 +19,19 @@ const mono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  alternates: {
+    canonical: "/",
+  },
   title: "AutomatIA — Software que trabalha enquanto você dorme",
   description:
     "Aplicações escaláveis, sistemas sob medida e automações com inteligência artificial que assumem o trabalho repetitivo da sua operação.",
   openGraph: {
     title: "AutomatIA",
     description: "Aplicações escaláveis, automações com IA e sistemas sob medida.",
+    url: "/",
+    siteName: "AutomatIA",
+    locale: "pt_BR",
     type: "website",
   },
 };

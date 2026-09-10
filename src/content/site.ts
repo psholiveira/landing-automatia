@@ -3,6 +3,9 @@
  * Para trocar copy, mexa SÓ neste arquivo.
  */
 
+/** URL canônica do site em produção (sem barra no final). */
+export const siteUrl = "https://www.automatia.company";
+
 export const contato = {
   email: "automatiabr@gmail.com",
   emailHref: "mailto:automatiabr@gmail.com",

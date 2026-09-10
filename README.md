@@ -6,7 +6,7 @@
 
 <p align="center">
   Landing page institucional da AutomatIA — aplicações escaláveis, automações com IA
-  e sistemas sob medida. https://landing-automatia.vercel.app/
+  e sistemas sob medida. https://www.automatia.company/
 </p>
 
 <p align="center">
