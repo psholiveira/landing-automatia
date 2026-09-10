@@ -26,14 +26,14 @@ type DockInjected = { width?: MotionValue<number> };
 
 function Logo() {
   return (
-    <a href="#topo" aria-label="AutomatIA — início" className="flex shrink-0 items-center px-2">
+    <a href="#topo" aria-label="AutomatIA — início" className="flex shrink-0 items-center px-1.5 sm:px-2">
       <Image
         src="/logo.png"
         alt="AutomatIA"
         width={727}
         height={169}
         priority
-        className="h-7 w-auto object-contain"
+        className="h-6 w-auto object-contain sm:h-7"
       />
     </a>
   );
@@ -87,7 +87,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header ref={headerRef} className="fixed inset-x-0 top-4 z-50 flex justify-center px-4">
+      <header ref={headerRef} className="fixed inset-x-0 top-3 z-50 flex justify-center px-3 sm:top-4 sm:px-4">
         <Dock
           align="start"
           panelHeight={PANEL_HEIGHT}
@@ -97,9 +97,9 @@ export default function Navbar() {
         >
           <Logo />
 
-          <span aria-hidden className="mx-1 h-6 w-px shrink-0 self-center bg-ink/15" />
+          <span aria-hidden className="mx-1 hidden h-6 w-px shrink-0 self-center bg-ink/15 lg:block" />
 
-          <nav className="flex h-full shrink-0 items-center gap-1">
+          <nav className="hidden h-full shrink-0 items-center gap-1 lg:flex">
             {navLinks.map((l) => {
               const Icon = NAV_ICONS[l.href];
               return (
@@ -115,9 +115,9 @@ export default function Navbar() {
             })}
           </nav>
 
-          <span aria-hidden className="mx-1 h-6 w-px shrink-0 self-center bg-ink/15" />
+          <span aria-hidden className="mx-1 hidden h-6 w-px shrink-0 self-center bg-ink/15 lg:block" />
 
-          <DockItem className="aspect-square shrink-0 rounded-full bg-ink">
+          <DockItem className="ml-2 aspect-square shrink-0 rounded-full bg-ink lg:ml-0">
             <DockMenuButton open={open} onClick={() => setOpen(true)} className="rounded-full" />
           </DockItem>
         </Dock>

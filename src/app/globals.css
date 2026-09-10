@@ -5,9 +5,13 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* nenhuma seção deve gerar rolagem horizontal no celular */
+    overflow-x: clip;
   }
   body {
     @apply bg-ground text-ink antialiased;
+    overflow-x: clip;
+    -webkit-tap-highlight-color: transparent;
   }
   * {
     text-wrap: pretty;
@@ -24,10 +28,21 @@
 @layer components {
   /* rótulo mono usado em todos os kickers de seção */
   .kicker {
-    @apply font-mono text-[13px] tracking-[0.2em];
+    @apply font-mono text-[11px] tracking-[0.18em] sm:text-[13px] sm:tracking-[0.2em];
   }
   /* container padrão de seção */
   .shell {
-    @apply mx-auto w-full max-w-[1400px] px-10;
+    @apply mx-auto w-full max-w-[1400px] px-5 sm:px-8 lg:px-10;
+  }
+  /* respiro vertical padrão das seções */
+  .section-y {
+    @apply py-[72px] sm:py-24 lg:py-[110px];
+  }
+  /* carrossel horizontal com snap — usado no mobile */
+  .snap-row {
+    @apply flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none];
+  }
+  .snap-row::-webkit-scrollbar {
+    display: none;
   }
 }

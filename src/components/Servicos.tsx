@@ -2,7 +2,8 @@ import { statSync } from "node:fs";
 import { join } from "node:path";
 import Reveal from "./Reveal";
 import { servicos } from "@/content/site";
-import { CircularGallery, type GalleryItem } from "@/components/ui/circular-gallery-2";
+import ServicosGaleria from "./ServicosGaleria";
+import { type GalleryItem } from "@/components/ui/circular-gallery-2";
 
 /**
  * A galeria carrega as imagens via `new Image()` direto no navegador, fora do
@@ -28,26 +29,54 @@ const galleryItems: GalleryItem[] = servicos.itens.map((s) => ({
 export default function Servicos() {
   return (
     <section id="servicos" className="border-b-2 border-ink">
-      <div className="shell pt-[110px]">
-        <div className="grid grid-cols-1 items-end gap-16 border-b-2 border-ink pb-14 lg:grid-cols-2">
-          <Reveal className="flex flex-col gap-5">
+      <div className="shell pt-[72px] sm:pt-24 lg:pt-[110px]">
+        <div className="grid grid-cols-1 items-end gap-7 border-b-2 border-ink pb-10 sm:gap-10 lg:grid-cols-2 lg:gap-16 lg:pb-14">
+          <Reveal className="flex flex-col gap-4 sm:gap-5">
             <div className="kicker text-brand">{servicos.kicker}</div>
-            <h2 className="m-0 text-[76px] font-extrabold leading-[0.9] tracking-[-0.035em]">
+            <h2 className="m-0 text-[clamp(32px,8.6vw,56px)] font-extrabold leading-[0.92] tracking-[-0.03em] lg:text-[76px] lg:leading-[0.9] lg:tracking-[-0.035em]">
               {servicos.titulo[0]}
               <br />
               {servicos.titulo[1]}
             </h2>
           </Reveal>
-          <Reveal className="max-w-[520px] text-[21px] font-medium leading-[1.4] text-ink/75">{servicos.intro}</Reveal>
+          <Reveal className="max-w-[520px] text-[16px] font-medium leading-[1.45] text-ink/75 sm:text-lg lg:text-[21px] lg:leading-[1.4]">
+            {servicos.intro}
+          </Reveal>
         </div>
       </div>
 
-      <Reveal y={40} className="relative h-[620px] w-full">
-        <CircularGallery items={galleryItems} bend={3} borderRadius={0.04} scrollEase={0.04} />
-      </Reveal>
+      {/* Mobile/tablet: carrossel HTML com snap — legível e com rolagem nativa. */}
+      <div className="lg:hidden">
+        <div className="snap-row px-5 pb-4 pt-8 sm:px-8 sm:pt-10">
+          {servicos.itens.map((s) => (
+            <article
+              key={s.n}
+              className="flex min-h-[300px] w-[76vw] max-w-[300px] shrink-0 snap-center flex-col justify-between border-2 border-ink bg-gradient-to-br from-navy to-brand p-6 text-white sm:min-h-[330px] sm:w-[60vw]"
+            >
+              <div className="font-mono text-[40px] font-extrabold leading-none text-sky/95 sm:text-[52px]">{s.n}</div>
+              <div className="flex flex-col gap-2.5">
+                <h3 className="m-0 text-[24px] font-extrabold leading-[1.02] tracking-[-0.03em] sm:text-[28px]">
+                  {s.nome}
+                </h3>
+                <p className="m-0 text-[14px] font-medium leading-[1.4] text-white/80 sm:text-[15px]">{s.desc}</p>
+              </div>
+            </article>
+          ))}
+          <span aria-hidden className="w-1 shrink-0" />
+        </div>
+        <div className="shell pb-9 pt-1">
+          <p className="kicker text-smoke">ARRASTE PARA O LADO PARA VER TODOS</p>
+        </div>
+      </div>
 
-      <div className="shell pb-11 pt-6">
-        <p className="kicker text-smoke">ARRASTE OU USE O SCROLL PARA NAVEGAR</p>
+      {/* Desktop: galeria circular em WebGL. */}
+      <div className="hidden lg:block">
+        <Reveal y={40} className="relative h-[620px] w-full">
+          <ServicosGaleria items={galleryItems} />
+        </Reveal>
+        <div className="shell pb-11 pt-6">
+          <p className="kicker text-smoke">ARRASTE OU USE O SCROLL PARA NAVEGAR</p>
+        </div>
       </div>
     </section>
   );

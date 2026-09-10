@@ -61,24 +61,24 @@ export default function Hero() {
 
   return (
     <header ref={root} id="topo" className="relative overflow-hidden border-b-2 border-ink bg-navy text-white">
-      <div data-grid className="pointer-events-none absolute inset-0 grid grid-cols-6 opacity-0">
+      <div data-grid className="pointer-events-none absolute inset-0 grid grid-cols-3 opacity-0 sm:grid-cols-6">
         {Array.from({ length: 5 }).map((_, i) => (
-          <div key={i} className="border-r border-white/10" />
+          <div key={i} className={"border-r border-white/10" + (i > 1 ? " hidden sm:block" : "")} />
         ))}
       </div>
       <div
         data-glow
-        className="pointer-events-none absolute -right-[10%] -top-[20%] h-[780px] w-[780px]"
+        className="pointer-events-none absolute -right-[10%] -top-[20%] h-[420px] w-[420px] sm:h-[600px] sm:w-[600px] lg:h-[780px] lg:w-[780px]"
         style={{ background: "radial-gradient(circle, rgba(26,115,200,0.55) 0%, rgba(11,42,91,0) 68%)" }}
       />
 
-      <div className="shell relative pt-[110px]">
-        <div data-kicker className="mb-11 flex items-center gap-3.5 opacity-0">
-          <span className="h-[9px] w-[9px] animate-blink bg-sky" />
+      <div className="shell relative pt-[92px] sm:pt-[104px] lg:pt-[110px]">
+        <div data-kicker className="mb-7 flex items-start gap-3 opacity-0 sm:mb-11 sm:items-center sm:gap-3.5">
+          <span className="mt-[5px] h-2 w-2 shrink-0 animate-blink bg-sky sm:mt-0 sm:h-[9px] sm:w-[9px]" />
           <span className="kicker text-skyMuted">{hero.kicker}</span>
         </div>
 
-        <h1 className="m-0 max-w-[1240px] text-[8.2vw] font-extrabold leading-[0.86] tracking-[-0.04em]">
+        <h1 className="m-0 max-w-[1240px] text-[clamp(38px,10.5vw,64px)] font-extrabold leading-[0.92] tracking-[-0.035em] md:text-[8.2vw] md:leading-[0.86] md:tracking-[-0.04em]">
           {hero.linhas.map((linha) => (
             <span key={linha} className="block overflow-hidden">
               <span data-line className="block">
@@ -93,20 +93,20 @@ export default function Hero() {
           </span>
         </h1>
 
-        <div className="mt-16 grid grid-cols-1 items-end gap-16 pb-[72px] lg:grid-cols-[1.1fr_1fr]">
-          <p data-sub className="m-0 max-w-[620px] text-2xl font-medium leading-[1.35] text-white/80 opacity-0">
+        <div className="mt-10 grid grid-cols-1 items-end gap-10 pb-14 sm:mt-14 lg:mt-16 lg:grid-cols-[1.1fr_1fr] lg:gap-16 lg:pb-[72px]">
+          <p data-sub className="m-0 max-w-[620px] text-[17px] font-medium leading-[1.4] text-white/80 opacity-0 sm:text-xl lg:text-2xl lg:leading-[1.35]">
             {hero.subtitulo}
           </p>
-          <div data-cta className="flex flex-col gap-[18px] opacity-0">
+          <div data-cta className="flex flex-col gap-3.5 opacity-0 sm:gap-[18px]">
             <a
               href="#contato"
-              className="flex items-center justify-between gap-5 bg-white px-7 py-6 text-[21px] font-extrabold tracking-[-0.01em] text-navy transition-colors hover:bg-sky"
+              className="flex items-center justify-between gap-4 bg-white px-5 py-5 text-[16px] font-extrabold tracking-[-0.01em] text-navy transition-colors hover:bg-sky sm:gap-5 sm:px-7 sm:py-6 sm:text-[21px]"
             >
               {hero.ctaPrimario} <span className="font-mono font-normal">→</span>
             </a>
             <a
               href="#servicos"
-              className="flex items-center justify-between gap-5 border-2 border-white/45 px-[26px] py-[22px] text-[19px] font-semibold text-white transition-colors hover:border-white hover:bg-white/10"
+              className="flex items-center justify-between gap-4 border-2 border-white/45 px-[18px] py-[18px] text-[15px] font-semibold text-white transition-colors hover:border-white hover:bg-white/10 sm:gap-5 sm:px-[26px] sm:py-[22px] sm:text-[19px]"
             >
               {hero.ctaSecundario} <span className="font-mono font-normal">↓</span>
             </a>
@@ -116,14 +116,20 @@ export default function Hero() {
 
       <div className="relative border-t-2 border-white/35">
         <div className="shell grid grid-cols-2 md:grid-cols-4">
-          {stats.map((s) => (
-            <div key={s.rotulo} className="flex flex-col gap-2 border-r border-white/20 py-10 pb-11 pr-8">
+          {stats.map((s, i) => (
+            <div
+              key={s.rotulo}
+              className={
+                "flex flex-col gap-1.5 border-r border-white/20 py-7 pr-4 sm:gap-2 sm:pr-8 md:py-10 md:pb-11 " +
+                (i < 2 ? "border-b border-white/20 md:border-b-0" : "")
+              }
+            >
               <Counter
                 valor={s.valor}
                 sufixo={s.sufixo}
-                className="block text-[62px] font-extrabold leading-none tracking-[-0.04em] text-white"
+                className="block text-[34px] font-extrabold leading-none tracking-[-0.04em] text-white sm:text-[46px] lg:text-[62px]"
               />
-              <div className="font-mono text-[13px] tracking-[0.1em] text-skyMuted">{s.rotulo}</div>
+              <div className="font-mono text-[11px] tracking-[0.1em] text-skyMuted sm:text-[13px]">{s.rotulo}</div>
             </div>
           ))}
         </div>

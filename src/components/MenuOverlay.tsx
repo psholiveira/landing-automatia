@@ -123,7 +123,7 @@ export default function MenuOverlay({ open, onClose }: { open: boolean; onClose:
         <div data-panel className="absolute inset-0 bg-brand" />
         <div data-panel className="absolute inset-0 bg-navy" />
 
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 hidden overflow-hidden lg:block">
           {SHAPES.map((group, i) => (
             <div key={i} data-shapes={i + 1} className="absolute inset-0 opacity-0">
               {group}
@@ -131,14 +131,14 @@ export default function MenuOverlay({ open, onClose }: { open: boolean; onClose:
           ))}
         </div>
 
-        <div className="relative flex h-full flex-col justify-between gap-[clamp(20px,4vh,56px)] overflow-y-auto px-[clamp(24px,5vw,64px)] pb-[clamp(24px,4vh,48px)] pt-[clamp(20px,3.4vh,40px)] text-white [overscroll-behavior:contain]">
-          <div data-fade className="flex items-center justify-between gap-8 opacity-0">
-            <Image src="/logo-white.png" alt="AutomatIA" width={727} height={169} className="h-[30px] w-auto" />
+        <div className="relative flex h-full flex-col justify-between gap-[clamp(20px,4vh,56px)] overflow-y-auto px-[clamp(20px,5vw,64px)] pb-[max(24px,env(safe-area-inset-bottom))] pt-[clamp(18px,3.4vh,40px)] text-white [overscroll-behavior:contain] sm:pb-[clamp(24px,4vh,48px)]">
+          <div data-fade className="flex items-center justify-between gap-4 opacity-0 sm:gap-8">
+            <Image src="/logo-white.png" alt="AutomatIA" width={727} height={169} className="h-[26px] w-auto sm:h-[30px]" />
             <button
               type="button"
               onClick={onClose}
               aria-label="Fechar menu"
-              className="cursor-pointer border-2 border-white/45 px-[18px] py-2.5 font-mono text-[13px] tracking-[0.14em] text-white transition-colors hover:border-white hover:bg-white/10"
+              className="shrink-0 cursor-pointer border-2 border-white/45 px-3.5 py-2 font-mono text-[11px] tracking-[0.12em] text-white transition-colors hover:border-white hover:bg-white/10 sm:px-[18px] sm:py-2.5 sm:text-[13px] sm:tracking-[0.14em]"
             >
               FECHAR ✕
             </button>
@@ -155,25 +155,25 @@ export default function MenuOverlay({ open, onClose }: { open: boolean; onClose:
                 <a
                   href={m.href}
                   onClick={onClose}
-                  className="flex items-baseline gap-7 py-[clamp(6px,1.1vh,14px)] text-white no-underline transition-colors hover:text-sky"
+                  className="flex items-baseline gap-3 py-[clamp(8px,1.1vh,14px)] text-white no-underline transition-colors hover:text-sky sm:gap-7"
                 >
-                  <span data-link className="block text-[clamp(30px,5.4vh,68px)] font-extrabold leading-[1.02] tracking-[-0.04em]">
+                  <span data-link className="block text-[clamp(27px,5.4vh,68px)] font-extrabold leading-[1.05] tracking-[-0.035em] sm:tracking-[-0.04em]">
                     {m.rotulo}
                   </span>
-                  <span className="font-mono text-[13px] tracking-[0.14em] text-skyMuted">{m.n}</span>
+                  <span className="ml-auto shrink-0 font-mono text-[11px] tracking-[0.12em] text-skyMuted sm:ml-0 sm:text-[13px] sm:tracking-[0.14em]">{m.n}</span>
                 </a>
               </li>
             ))}
           </ul>
 
-          <div data-fade className="flex shrink-0 flex-wrap items-end justify-between gap-10 border-t-2 border-white/40 pt-[clamp(16px,2.4vh,26px)] opacity-0">
+          <div data-fade className="flex shrink-0 flex-wrap items-end justify-between gap-5 border-t-2 border-white/40 pt-[clamp(16px,2.4vh,26px)] opacity-0 sm:gap-10">
             <div className="flex flex-col gap-1.5">
-              <span className="font-mono text-xs tracking-[0.16em] text-skyMuted">DIAGNÓSTICO GRATUITO</span>
-              <a href={contato.emailHref} className="text-[clamp(21px,3vh,30px)] font-extrabold tracking-[-0.02em] text-white transition-colors hover:text-sky">
+              <span className="font-mono text-[10px] tracking-[0.14em] text-skyMuted sm:text-xs sm:tracking-[0.16em]">DIAGNÓSTICO GRATUITO</span>
+              <a href={contato.emailHref} className="break-all text-[clamp(18px,3vh,30px)] font-extrabold tracking-[-0.02em] text-white transition-colors hover:text-sky">
                 {contato.email}
               </a>
             </div>
-            <a href={contato.instagram} className="font-mono text-[13px] tracking-[0.14em] text-white transition-colors hover:text-sky">
+            <a href={contato.instagram} className="font-mono text-[11px] tracking-[0.12em] text-white transition-colors hover:text-sky sm:text-[13px] sm:tracking-[0.14em]">
               INSTAGRAM {contato.handle.toUpperCase()} →
             </a>
           </div>
