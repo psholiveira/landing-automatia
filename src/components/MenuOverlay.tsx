@@ -174,10 +174,10 @@ export default function MenuOverlay({ open, onClose }: { open: boolean; onClose:
               </a>
             </div>
             <div className="flex flex-col items-start gap-2 font-mono text-[11px] tracking-[0.12em] sm:items-end sm:text-[13px] sm:tracking-[0.14em]">
-              <a href={contato.whatsapp} className="whitespace-nowrap text-white transition-colors hover:text-sky">
+              <a href={contato.whatsapp} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap text-white transition-colors hover:text-sky">
                 WHATSAPP {contato.telefone} →
               </a>
-              <a href={contato.instagram} className="text-white transition-colors hover:text-sky">
+              <a href={contato.instagram} target="_blank" rel="noopener noreferrer" className="text-white transition-colors hover:text-sky">
                 INSTAGRAM {contato.handle.toUpperCase()} →
               </a>
             </div>
