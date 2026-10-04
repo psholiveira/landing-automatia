@@ -11,17 +11,22 @@ const whatsappNumero = "5583920036170";
 /** Mensagem que já chega digitada na conversa — o mesmo pedido do CTA principal. */
 const whatsappTexto = "Olá! Vim pelo site e quero um diagnóstico gratuito.";
 
+/** Link do WhatsApp com uma mensagem própria já digitada. */
+export const whatsappCom = (texto: string) =>
+  `https://wa.me/${whatsappNumero}?text=${encodeURIComponent(texto)}`;
+
 export const contato = {
   email: "automatiabr@gmail.com",
   emailHref: "mailto:automatiabr@gmail.com",
   telefone: "(83) 92003-6170",
-  whatsapp: `https://wa.me/${whatsappNumero}?text=${encodeURIComponent(whatsappTexto)}`,
+  whatsapp: whatsappCom(whatsappTexto),
   instagram: "https://www.instagram.com/_automatia/",
   handle: "@_automatia",
 };
 
 export const navLinks = [
   { rotulo: "Serviços", href: "#servicos" },
+  { rotulo: "Cases", href: "#cases" },
   { rotulo: "Método", href: "#metodo" },
   { rotulo: "Agentes de IA", href: "#agentes" },
 ];
@@ -29,9 +34,10 @@ export const navLinks = [
 /** Menu cinético em tela cheia */
 export const menuLinks = [
   { n: "01", rotulo: "Serviços", href: "#servicos" },
-  { n: "02", rotulo: "Automações com IA", href: "#agentes" },
-  { n: "03", rotulo: "Método", href: "#metodo" },
-  { n: "04", rotulo: "Falar com a gente", href: "#contato" },
+  { n: "02", rotulo: "Cases", href: "#cases" },
+  { n: "03", rotulo: "Automações com IA", href: "#agentes" },
+  { n: "04", rotulo: "Método", href: "#metodo" },
+  { n: "05", rotulo: "Falar com a gente", href: "#contato" },
 ];
 
 export const hero = {
@@ -42,7 +48,12 @@ export const hero = {
     "Construímos aplicações escaláveis, sistemas sob medida e automações com inteligência artificial que assumem o trabalho repetitivo da sua operação — e continuam rodando depois que a gente sai da sala.",
   ctaPrimario: "Quero um diagnóstico gratuito",
   ctaSecundario: "Ver o que fazemos",
+  /** Quebra de objeção logo abaixo dos botões — tudo já prometido no resto da página. */
+  garantias: ["30 min, sem custo", "Escopo e preço fechados", "1º entregável em 2 semanas"],
 };
+
+/** Botão do navbar e botão flutuante — os dois abrem o WhatsApp. */
+export const ctaCurto = "Orçamento grátis";
 
 export const stats = [
   { valor: 9, sufixo: "", rotulo: "FRENTES DE ATUAÇÃO" },
@@ -52,7 +63,7 @@ export const stats = [
 ];
 
 export const servicos = {
-  kicker: "01 — O QUE FAZEMOS",
+  kicker: "O QUE FAZEMOS",
   titulo: ["Nove frentes.", "Um objetivo: escala."],
   intro:
     "Da landing page que converte ao sistema que sustenta a operação inteira. Você contrata o resultado, não a tecnologia — a escolha da stack é problema nosso.",
@@ -69,8 +80,135 @@ export const servicos = {
   ],
 };
 
+/** Faixa logo abaixo do herói. Mantenha só ferramentas com que vocês já trabalharam de verdade. */
+export const integracoes = {
+  rotulo: "INTEGRAMOS COM O QUE VOCÊ JÁ USA",
+  itens: [
+    "WhatsApp Business",
+    "OpenAI",
+    "Google Sheets",
+    "Instagram",
+    "Mercado Pago",
+    "Stripe",
+    "HubSpot",
+    "RD Station",
+    "Bling",
+    "Omie",
+    "Google Agenda",
+    "Notion",
+  ],
+};
+
+export const segmentos = {
+  kicker: "PARA QUEM É",
+  titulo: "Feito para operações que já cansaram do improviso.",
+  intro: "Se o seu negócio se parece com algum destes, a gente já sabe por onde começar.",
+  dorRotulo: "HOJE",
+  entregaRotulo: "COM A AUTOMATIA",
+  cta: "Falar sobre o meu caso",
+  itens: [
+    {
+      nome: "Clínicas e consultórios",
+      dor: "Agenda pelo WhatsApp, paciente que falta e recepção sobrecarregada.",
+      entrega: "Agente que agenda, confirma e remarca sozinho, direto na sua agenda.",
+      mensagem: "Olá! Tenho uma clínica/consultório e quero um diagnóstico gratuito.",
+    },
+    {
+      nome: "E-commerce e varejo",
+      dor: "Atendimento repetitivo, pedido digitado à mão e estoque desencontrado.",
+      entrega: "Atendimento 24/7 e pedidos sincronizados entre loja, ERP e marketplace.",
+      mensagem: "Olá! Tenho um e-commerce/loja e quero um diagnóstico gratuito.",
+    },
+    {
+      nome: "Prestadores de serviço",
+      dor: "Orçamento demora dias e o lead esfria antes de ver a proposta.",
+      entrega: "Qualificação automática e orçamento em minutos, registrado no CRM.",
+      mensagem: "Olá! Sou prestador de serviço e quero um diagnóstico gratuito.",
+    },
+    {
+      nome: "Indústria e distribuição",
+      dor: "Planilhas paralelas, relatório manual e número em que ninguém confia.",
+      entrega: "Sistema sob medida e dashboards em tempo real ligados ao ERP.",
+      mensagem: "Olá! Trabalho com indústria/distribuição e quero um diagnóstico gratuito.",
+    },
+  ],
+};
+
+/**
+ * Cases reais, com link para o projeto no ar.
+ * Prints em /public/cases/ (desktop 1440x900 e celular 390x844).
+ * `depoimento` é opcional: deixe `texto` vazio e o bloco some.
+ * Com `rascunho: true` a seção só aparece em desenvolvimento.
+ */
+export const cases = {
+  rascunho: false,
+  kicker: "CASES",
+  titulo: "Projetos no ar. Abra e confira.",
+  intro: "Nada de mockup: os dois estão funcionando agora, com cliente de verdade usando.",
+  problemaRotulo: "O DESAFIO",
+  solucaoRotulo: "O QUE CONSTRUÍMOS",
+  linkRotulo: "Ver o site no ar",
+  itens: [
+    {
+      cliente: "Roots Tabacaria",
+      segmento: "VAREJO",
+      local: "RECIFE · PE",
+      problema:
+        "A lista de produtos era mandada à mão pelo WhatsApp, cliente por cliente — sempre desatualizada e trabalhosa de manter.",
+      solucao:
+        "Vitrine mobile-first sempre atualizada: o cliente monta o carrinho e o pedido chega pronto no WhatsApp. A loja troca produtos e preços sozinha, por um painel próprio.",
+      entregas: ["Catálogo mobile-first", "Pedido direto no WhatsApp", "Monte seu kit", "Painel administrativo"],
+      destaque: { valor: "0", rotulo: "CADASTROS PARA FAZER UM PEDIDO" },
+      url: "https://tabacaria-roots.vercel.app",
+      dominio: "tabacaria-roots.vercel.app",
+      imagem: { desktop: "/cases/roots-desktop.jpg", mobile: "/cases/roots-mobile.jpg" },
+      depoimento: { texto: "", autor: "", cargo: "", foto: "" },
+    },
+    {
+      cliente: "Rogério Dias · Grupo PBMED",
+      segmento: "REPRESENTAÇÃO COMERCIAL",
+      local: "JOÃO PESSOA · PB",
+      problema:
+        "Um representante com 15 laboratórios precisava de um único link para apresentar portfólio, trajetória e catálogos a farmácias, clínicas e hospitais.",
+      solucao:
+        "Site de uma página com os laboratórios em painéis, catálogos em PDF que abrem direto do Google Drive e contato pelo WhatsApp. Catálogo novo entra sem mexer em código.",
+      entregas: ["Site one-page", "Catálogos em PDF", "Contato via WhatsApp", "Atualização sem programador"],
+      destaque: { valor: "15", rotulo: "LABORATÓRIOS EM UM SÓ LINK" },
+      url: "https://www.rogerioferreiradias.com",
+      dominio: "rogerioferreiradias.com",
+      imagem: { desktop: "/cases/rogerio-desktop.jpg", mobile: "/cases/rogerio-mobile.jpg" },
+      depoimento: { texto: "", autor: "", cargo: "", foto: "" },
+    },
+  ],
+};
+
+/**
+ * Equipe. Mesma regra dos cases: com `rascunho: true` só aparece em desenvolvimento.
+ * Fotos em /public/equipe/ (proporção 3:4, como sai do celular); sem foto, mostra as iniciais.
+ */
+export const equipe = {
+  rascunho: false,
+  kicker: "QUEM FAZ",
+  titulo: "Gente de verdade do outro lado da tela.",
+  texto: "Você fala direto com quem desenha e constrói o seu projeto — sem repasse, sem intermediário.",
+  pessoas: [
+    {
+      nome: "Pedro Santos",
+      cargo: "Engenheiro de Software · Web Designer",
+      bio: "Desenha e constrói os sites, sistemas e automações — do primeiro rascunho ao que fica no ar.",
+      foto: "/equipe/pedro.jpg",
+    },
+    {
+      nome: "Maria Luiza",
+      cargo: "Internacionalista · Administradora",
+      bio: "Especialista em MEX e administradora: cuida do diagnóstico, do escopo e de quem está do outro lado.",
+      foto: "/equipe/maria-luiza.jpg",
+    },
+  ],
+};
+
 export const antesDepois = {
-  kicker: "02 — AUTOMAÇÕES COM IA",
+  kicker: "AUTOMAÇÕES COM IA",
   titulo: "Se um humano repete a mesma tarefa duas vezes, uma IA já deveria estar fazendo.",
   antes: [
     "Planilha atualizada à mão",
@@ -89,7 +227,7 @@ export const antesDepois = {
 };
 
 export const agentes = {
-  kicker: "03 — AGENTES DE IA",
+  kicker: "AGENTES DE IA",
   titulo: "Seu comercial dorme. Nosso agente não.",
   texto:
     "Um agente treinado no seu negócio atende no WhatsApp, no site e no Instagram: responde, qualifica, cobra o retorno e joga a reunião direto na agenda do time.",
@@ -98,6 +236,7 @@ export const agentes = {
     { valor: "24/7", rotulo: "SEM ESCALA, SEM FÉRIAS" },
     { valor: "0", rotulo: "LEAD ESQUECIDO" },
   ],
+  cta: "Quero um agente assim",
   chat: [
     { texto: "Oi! Vi que vocês fazem automação. Consigo tirar orçamento hoje?", de: "cliente" as const },
     { texto: "Consegue. Me diz duas coisas: qual processo trava mais hoje e quantas pessoas mexem nele?", de: "agente" as const },
@@ -108,13 +247,41 @@ export const agentes = {
 };
 
 export const metodo = {
-  kicker: "04 — COMO TRABALHAMOS",
+  kicker: "COMO TRABALHAMOS",
   titulo: "Quatro etapas. Zero surpresa na fatura.",
   etapas: [
     { n: "ETAPA 01", titulo: "DIAGNÓSTICO", texto: "Mapeamos o processo com quem executa e apontamos onde o tempo e o dinheiro estão vazando." },
     { n: "ETAPA 02", titulo: "ESCOPO FECHADO", texto: "Preço, prazo e entregas no papel antes da primeira linha de código. O que mudar depois, você aprova antes." },
     { n: "ETAPA 03", titulo: "CONSTRUÇÃO", texto: "Entregas semanais funcionando de verdade, em ambiente real — não slides de status." },
     { n: "ETAPA 04", titulo: "OPERAÇÃO", texto: "Monitoramos, ajustamos e escalamos junto com a sua demanda. O sistema continua vivo." },
+  ],
+  cta: "Começar pela etapa 01 — é gratuita",
+};
+
+export const faq = {
+  kicker: "PERGUNTAS FREQUENTES",
+  titulo: "Antes de você perguntar.",
+  itens: [
+    {
+      p: "Quanto custa um projeto?",
+      r: "Depende do tamanho do processo, por isso o diagnóstico vem primeiro e é gratuito. Você sai dele com preço e prazo fechados no papel — sem cobrança por hora e sem surpresa na fatura.",
+    },
+    {
+      p: "Em quanto tempo vejo resultado?",
+      r: "O primeiro entregável funcionando chega em até 2 semanas. Depois disso, entregas semanais em ambiente real, para você acompanhar o avanço usando, não lendo relatório.",
+    },
+    {
+      p: "Preciso entender de tecnologia?",
+      r: "Não. Você explica como o processo funciona hoje; a escolha de ferramentas, arquitetura e integrações é responsabilidade nossa.",
+    },
+    {
+      p: "Funciona com os sistemas que já uso?",
+      r: "Na maioria dos casos, sim. Integramos ERP, CRM, WhatsApp, meios de pagamento e planilhas — a ideia é aproveitar o que já roda, não trocar tudo.",
+    },
+    {
+      p: "E depois que o projeto termina?",
+      r: "Seguimos monitorando, corrigindo e evoluindo o que está no ar. Nada de entregar e sumir.",
+    },
   ],
 };
 
@@ -123,6 +290,26 @@ export const cta = {
   titulo: "Traga o processo que mais te trava.",
   texto:
     "Uma conversa de 30 minutos, sem custo: mapeamos onde o tempo está vazando e dizemos o que dá para automatizar primeiro — mesmo que não seja com a gente.",
+};
+
+export const rodape = {
+  frase: "Software que trabalha enquanto você dorme.",
+  status: "VAGAS DE PROJETO ABERTAS",
+  navegueRotulo: "NAVEGUE",
+  links: [
+    { rotulo: "Serviços", href: "#servicos" },
+    { rotulo: "Para quem é", href: "#para-quem" },
+    { rotulo: "Cases", href: "#cases" },
+    { rotulo: "Método", href: "#metodo" },
+    { rotulo: "Equipe", href: "#equipe" },
+    { rotulo: "Perguntas frequentes", href: "#faq" },
+  ],
+  contatoRotulo: "CONTATO",
+  comeceRotulo: "COMECE AGORA",
+  comeceTexto: "Diagnóstico gratuito de 30 minutos, sem compromisso.",
+  comeceCta: "Chamar no WhatsApp",
+  topo: "Voltar ao topo",
+  direitos: "Todos os direitos reservados",
 };
 
 /** Página 404 — rotas que não existem */

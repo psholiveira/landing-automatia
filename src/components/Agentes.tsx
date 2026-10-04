@@ -3,7 +3,9 @@
 import { useRef } from "react";
 import { useReveal } from "@/hooks/useReveal";
 import Reveal from "./Reveal";
-import { agentes } from "@/content/site";
+import { agentes, contato } from "@/content/site";
+import { WhatsAppIcon } from "./WhatsApp";
+import Titulo from "./Titulo";
 
 export default function Agentes() {
   const chatRef = useRef<HTMLDivElement>(null);
@@ -16,7 +18,7 @@ export default function Agentes() {
           <div className="flex flex-col gap-6 sm:gap-9">
             <Reveal className="kicker text-skyPale">{agentes.kicker}</Reveal>
             <Reveal>
-              <h2 className="m-0 text-[clamp(34px,9.5vw,58px)] font-extrabold leading-[0.95] tracking-[-0.035em] lg:text-[92px] lg:leading-[0.87] lg:tracking-[-0.04em]">{agentes.titulo}</h2>
+              <Titulo className="m-0 text-[clamp(34px,9.5vw,58px)] font-extrabold leading-[0.95] tracking-[-0.035em] lg:text-[92px] lg:leading-[0.87] lg:tracking-[-0.04em]">{agentes.titulo}</Titulo>
             </Reveal>
             <Reveal className="max-w-[560px] text-[16px] font-medium leading-[1.45] text-white/90 sm:text-lg lg:text-[22px] lg:leading-[1.4]">{agentes.texto}</Reveal>
 
@@ -28,6 +30,19 @@ export default function Agentes() {
                 </Reveal>
               ))}
             </div>
+
+            <Reveal>
+              <a
+                href={contato.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex w-full items-center gap-3 border-2 border-ink bg-white px-5 py-4 text-[16px] font-extrabold tracking-[-0.01em] text-navy shadow-[6px_6px_0_rgba(11,42,91,0.45)] transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-skyPale sm:w-auto sm:gap-4 sm:px-7 sm:py-5 sm:text-xl"
+              >
+                <WhatsAppIcon className="h-6 w-6 shrink-0 text-[#1fa855]" />
+                {agentes.cta}
+                <span className="ml-auto pl-2 font-mono font-normal transition-transform group-hover:translate-x-1">→</span>
+              </a>
+            </Reveal>
           </div>
 
           <div ref={chatCard} className="border-2 border-ink bg-white text-ink shadow-[8px_8px_0_rgba(11,42,91,0.45)] sm:shadow-[18px_18px_0_rgba(11,42,91,0.45)]">

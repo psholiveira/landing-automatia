@@ -23,9 +23,11 @@ const config: Config = {
       },
       keyframes: {
         blink: { "0%,49%": { opacity: "1" }, "50%,100%": { opacity: "0" } },
+        marquee: { to: { transform: "translateX(-50%)" } },
       },
       animation: {
         blink: "blink 1.4s steps(1) infinite",
+        marquee: "marquee 40s linear infinite",
       },
       borderRadius: { none: "0px" },
     },

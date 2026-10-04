@@ -4,6 +4,7 @@ import Reveal from "./Reveal";
 import { servicos } from "@/content/site";
 import ServicosGaleria from "./ServicosGaleria";
 import { type GalleryItem } from "@/components/ui/circular-gallery-2";
+import Titulo from "./Titulo";
 
 /**
  * A galeria carrega as imagens via `new Image()` direto no navegador, fora do
@@ -33,11 +34,11 @@ export default function Servicos() {
         <div className="grid grid-cols-1 items-end gap-7 border-b-2 border-ink pb-10 sm:gap-10 lg:grid-cols-2 lg:gap-16 lg:pb-14">
           <Reveal className="flex flex-col gap-4 sm:gap-5">
             <div className="kicker text-brand">{servicos.kicker}</div>
-            <h2 className="m-0 text-[clamp(32px,8.6vw,56px)] font-extrabold leading-[0.92] tracking-[-0.03em] lg:text-[76px] lg:leading-[0.9] lg:tracking-[-0.035em]">
+            <Titulo className="m-0 text-[clamp(32px,8.6vw,56px)] font-extrabold leading-[0.92] tracking-[-0.03em] lg:text-[76px] lg:leading-[0.9] lg:tracking-[-0.035em]">
               {servicos.titulo[0]}
               <br />
               {servicos.titulo[1]}
-            </h2>
+            </Titulo>
           </Reveal>
           <Reveal className="max-w-[520px] text-[16px] font-medium leading-[1.45] text-ink/75 sm:text-lg lg:text-[21px] lg:leading-[1.4]">
             {servicos.intro}
@@ -45,12 +46,24 @@ export default function Servicos() {
         </div>
       </div>
 
-      <Reveal y={40} className="relative h-[620px] w-full">
+      <Reveal y={40} className="relative h-[480px] w-full sm:h-[620px]">
         <ServicosGaleria items={galleryItems} />
       </Reveal>
 
-      <div className="shell pb-9 pt-5 lg:pb-11 lg:pt-6">
-        <p className="kicker text-smoke">ARRASTE OU USE O SCROLL PARA NAVEGAR</p>
+      <div className="shell flex flex-col gap-5 pb-12 pt-4 sm:pb-16 lg:pt-6">
+        <p className="kicker m-0 text-smoke">ARRASTE PARA NAVEGAR · OU VEJA TUDO DE UMA VEZ:</p>
+        {/* Os cards da galeria são imagens; esta lista deixa os serviços legíveis de relance e indexáveis. */}
+        <ul className="m-0 flex list-none flex-wrap gap-2 p-0 sm:gap-2.5">
+          {servicos.itens.map((s) => (
+            <li
+              key={s.n}
+              className="flex items-center gap-2 border-2 border-ink bg-white px-3 py-2 text-[14px] font-bold tracking-[-0.01em] sm:px-4 sm:py-2.5 sm:text-[16px]"
+            >
+              <span className="font-mono text-[11px] font-normal text-brand sm:text-xs">{s.n}</span>
+              {s.nome}
+            </li>
+          ))}
+        </ul>
       </div>
 
     </section>

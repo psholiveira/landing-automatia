@@ -52,6 +52,56 @@
     }
   }
 
+  /*
+   * Cortina de abertura do herói. É CSS puro de propósito: abre sozinha mesmo
+   * que o JS demore ou falhe, então nunca deixa o herói tampado.
+   */
+  .cortina {
+    animation: cortina-abre 0.9s cubic-bezier(0.77, 0, 0.18, 1) 0.3s both;
+  }
+  .cortina-linha {
+    animation: cortina-linha 0.75s cubic-bezier(0.65, 0, 0.35, 1) both;
+  }
+  @keyframes cortina-abre {
+    to {
+      transform: scaleY(0);
+    }
+  }
+  @keyframes cortina-linha {
+    0% {
+      transform: scaleX(0);
+    }
+    45% {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scaleX(1);
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .cortina,
+    .cortina-linha {
+      display: none;
+    }
+  }
+
+  /* reflexo que varre o texto em destaque do herói (a posição é animada via GSAP) */
+  .brilho {
+    background-image: linear-gradient(100deg, #6fabe8 0%, #6fabe8 42%, #ffffff 50%, #6fabe8 58%, #6fabe8 100%);
+    background-size: 250% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* granulado de filme, estático (animar ruído custa caro em celular) */
+  .grao {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
   /* carrossel horizontal com snap — usado no mobile */
   .snap-row {
     @apply flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none];

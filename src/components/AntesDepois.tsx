@@ -3,6 +3,7 @@
 import { useReveal } from "@/hooks/useReveal";
 import Reveal from "./Reveal";
 import { antesDepois } from "@/content/site";
+import Titulo from "./Titulo";
 
 export default function AntesDepois() {
   const rule = useReveal<HTMLDivElement>({ scaleY: true });
@@ -12,9 +13,9 @@ export default function AntesDepois() {
       <div className="shell section-y">
         <Reveal className="mb-10 flex flex-col gap-4 sm:mb-14 sm:gap-5 lg:mb-16">
           <div className="kicker text-brand">{antesDepois.kicker}</div>
-          <h2 className="m-0 max-w-[1000px] text-[clamp(30px,8vw,52px)] font-extrabold leading-[0.98] tracking-[-0.03em] lg:text-[82px] lg:leading-[0.9] lg:tracking-[-0.038em]">
+          <Titulo className="m-0 max-w-[1000px] text-[clamp(30px,8vw,52px)] font-extrabold leading-[0.98] tracking-[-0.03em] lg:text-[82px] lg:leading-[0.9] lg:tracking-[-0.038em]">
             {antesDepois.titulo}
-          </h2>
+          </Titulo>
         </Reveal>
 
         <div className="grid grid-cols-1 gap-10 border-t-2 border-ink pt-8 sm:gap-12 lg:grid-cols-[1fr_2px_1fr] lg:gap-14 lg:pt-10">
