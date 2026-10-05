@@ -2,7 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-import { siteUrl } from "@/content/site";
+import { gaId, siteUrl } from "@/content/site";
+import Consentimento from "@/components/Consentimento";
 
 const archivo = Archivo({
   subsets: ["latin"],
@@ -46,7 +47,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={archivo.variable + " " + mono.variable}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Consentimento gaId={gaId} />
+      </body>
     </html>
   );
 }

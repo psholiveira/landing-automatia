@@ -6,6 +6,9 @@
 /** URL canônica do site em produção (sem barra no final). */
 export const siteUrl = "https://www.automatia.company";
 
+/** ID de métricas do Google Analytics 4 (público: aparece no HTML de qualquer forma). */
+export const gaId = "G-ZK74CTXMD0";
+
 /** O wa.me exige o número em E.164, sem "+" nem pontuação. */
 const whatsappNumero = "5583920036170";
 /** Mensagem que já chega digitada na conversa — o mesmo pedido do CTA principal. */
