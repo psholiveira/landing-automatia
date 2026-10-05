@@ -1,6 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowUp } from "lucide-react";
-import { contato, rodape } from "@/content/site";
+import { contato, orcamentoHref, rodape } from "@/content/site";
 import Titulo from "./Titulo";
 import BtnConteudo from "./BtnConteudo";
 
@@ -67,15 +68,12 @@ export default function Footer() {
           <div className="flex flex-col items-start">
             <p className={rotuloColuna}>{rodape.comeceRotulo}</p>
             <p className="m-0 mb-5 max-w-[300px] text-[16px] leading-[1.55] text-white/70">{rodape.comeceTexto}</p>
-            <a
-              href={contato.whatsapp}
-              data-ga="rodape-botao"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href={orcamentoHref("rodape")}
               className="btn btn-claro"
             >
               <BtnConteudo seta="direita">{rodape.comeceCta}</BtnConteudo>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

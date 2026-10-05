@@ -18,6 +18,10 @@ const whatsappTexto = "Olá! Vim pelo site e quero um diagnóstico gratuito.";
 export const whatsappCom = (texto: string) =>
   `https://wa.me/${whatsappNumero}?text=${encodeURIComponent(texto)}`;
 
+/** Página de orçamento; `origem` diz qual botão trouxe a pessoa (vai para o GA). */
+export const orcamentoHref = (origem: string, segmento?: string) =>
+  `/orcamento?${new URLSearchParams(segmento ? { origem, segmento } : { origem })}`;
+
 export const contato = {
   email: "automatiabr@gmail.com",
   emailHref: "mailto:automatiabr@gmail.com",
@@ -98,25 +102,21 @@ export const segmentos = {
       nome: "Clínicas e consultórios",
       dor: "Agenda pelo WhatsApp, paciente que falta e recepção sobrecarregada.",
       entrega: "Agente que agenda, confirma e remarca sozinho, direto na sua agenda.",
-      mensagem: "Olá! Tenho uma clínica/consultório e quero um diagnóstico gratuito.",
     },
     {
       nome: "E-commerce e varejo",
       dor: "Atendimento repetitivo, pedido digitado à mão e estoque desencontrado.",
       entrega: "Atendimento 24/7 e pedidos sincronizados entre loja, ERP e marketplace.",
-      mensagem: "Olá! Tenho um e-commerce/loja e quero um diagnóstico gratuito.",
     },
     {
       nome: "Prestadores de serviço",
       dor: "Orçamento demora dias e o lead esfria antes de ver a proposta.",
       entrega: "Qualificação automática e orçamento em minutos, registrado no CRM.",
-      mensagem: "Olá! Sou prestador de serviço e quero um diagnóstico gratuito.",
     },
     {
       nome: "Indústria e distribuição",
       dor: "Planilhas paralelas, relatório manual e número em que ninguém confia.",
       entrega: "Sistema sob medida e dashboards em tempo real ligados ao ERP.",
-      mensagem: "Olá! Trabalho com indústria/distribuição e quero um diagnóstico gratuito.",
     },
   ],
 };
@@ -287,9 +287,45 @@ export const rodape = {
   contatoRotulo: "Contato",
   comeceRotulo: "Comece agora",
   comeceTexto: "Diagnóstico gratuito de 30 minutos, sem compromisso.",
-  comeceCta: "Chamar no WhatsApp",
+  comeceCta: "Pedir orçamento",
   topo: "Voltar ao topo",
   direitos: "Todos os direitos reservados",
+};
+
+/** Página /orcamento: o formulário que monta a mensagem e abre o WhatsApp */
+export const orcamento = {
+  kicker: "Orçamento · diagnóstico gratuito",
+  titulo: "Conte o que você precisa.",
+  destaque: "A conversa começa no WhatsApp.",
+  texto:
+    "Leva menos de um minuto. Suas respostas já chegam escritas na mensagem, então ninguém precisa te perguntar tudo de novo.",
+  passos: [
+    { n: "01", texto: "Você preenche o essencial aqui." },
+    { n: "02", texto: "O WhatsApp abre com a mensagem pronta — é só enviar." },
+    { n: "03", texto: "Respondemos com os próximos passos e marcamos o diagnóstico." },
+  ],
+  campos: {
+    nome: "Seu nome",
+    empresa: "Empresa",
+    opcional: "opcional",
+    segmento: "Seu negócio é",
+    servico: "O que você precisa?",
+    prazo: "Para quando?",
+    descricao: "O que você quer resolver?",
+    descricaoExemplo: "Ex.: hoje os orçamentos saem de uma planilha e levam 2 dias para chegar ao cliente.",
+  },
+  outroSegmento: "Outro",
+  naoSei: "Ainda não sei",
+  prazos: ["O quanto antes", "Em até 1 mês", "Em 1 a 3 meses", "Só pesquisando"],
+  enviar: "Enviar pelo WhatsApp",
+  privacidade: "Nada fica salvo neste site: suas respostas vão só na mensagem do WhatsApp.",
+  mensagemAbertura: "Olá! Vim pelo site e quero um orçamento.",
+  sucessoKicker: "Mensagem pronta",
+  sucessoTitulo: "Agora é só enviar no WhatsApp.",
+  sucessoTexto: "Abrimos a conversa com as suas respostas já escritas. Se ela não abriu, use o botão abaixo.",
+  sucessoCta: "Abrir o WhatsApp",
+  corrigir: "Corrigir respostas",
+  voltar: "Voltar ao site",
 };
 
 /** Página 404 — rotas que não existem */

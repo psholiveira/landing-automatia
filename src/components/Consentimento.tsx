@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { GoogleAnalytics, sendGAEvent } from "@next/third-parties/google";
+import { origemDoOrcamento } from "@/lib/utils";
 import BtnConteudo from "./BtnConteudo";
 
 const CHAVE = "consentimento-analytics";
@@ -24,12 +25,16 @@ export default function Consentimento({ gaId }: { gaId: string }) {
     setEscolha(salvo === "aceito" || salvo === "recusado" ? salvo : null);
   }, []);
 
-  // Um ouvinte só para todos os links do WhatsApp; o data-ga do link diz de onde veio o clique.
+  // Um ouvinte só para os links do site: botões de orçamento (a origem vem na URL) e
+  // links diretos do WhatsApp (data-ga). O envio do formulário é medido em Orcamento.tsx.
   useEffect(() => {
     if (escolha !== "aceito") return;
     function aoClicar(e: MouseEvent) {
-      const link = (e.target as Element).closest<HTMLAnchorElement>('a[href*="wa.me"]');
-      if (link) sendGAEvent("event", "clique_whatsapp", { botao: link.dataset.ga ?? "outro" });
+      const link = (e.target as Element).closest<HTMLAnchorElement>('a[href*="wa.me"], a[href^="/orcamento"]');
+      if (!link) return;
+      const url = new URL(link.href);
+      if (url.pathname === "/orcamento") sendGAEvent("event", "clique_orcamento", { botao: origemDoOrcamento(url.searchParams) });
+      else sendGAEvent("event", "clique_whatsapp", { botao: link.dataset.ga ?? "outro" });
     }
     document.addEventListener("click", aoClicar);
     return () => document.removeEventListener("click", aoClicar);

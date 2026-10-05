@@ -1,5 +1,6 @@
 import Reveal from "./Reveal";
-import { contato, metodo } from "@/content/site";
+import Link from "next/link";
+import { metodo, orcamentoHref } from "@/content/site";
 import Titulo from "./Titulo";
 import BtnConteudo from "./BtnConteudo";
 
@@ -28,15 +29,12 @@ export default function Metodo() {
         </div>
 
         <Reveal className="mt-10 border-t border-ink/[0.08] pt-10 sm:mt-0">
-          <a
-            href={contato.whatsapp}
-            data-ga="metodo"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href={orcamentoHref("metodo")}
             className="btn btn-escuro w-full sm:w-auto"
           >
             <BtnConteudo seta="direita">{metodo.cta}</BtnConteudo>
-          </a>
+          </Link>
         </Reveal>
       </div>
     </section>

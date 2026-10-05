@@ -1,7 +1,8 @@
 import { ArrowRight } from "lucide-react";
 import Reveal from "./Reveal";
 import { WhatsAppIcon } from "./WhatsApp";
-import { segmentos, whatsappCom } from "@/content/site";
+import Link from "next/link";
+import { orcamentoHref, segmentos } from "@/content/site";
 import Titulo from "./Titulo";
 
 export default function Segmentos() {
@@ -28,17 +29,14 @@ export default function Segmentos() {
                     <p className="m-0 text-[16px] font-medium leading-[1.45] text-ink">{s.entrega}</p>
                   </div>
                 </div>
-                <a
-                  href={whatsappCom(s.mensagem)}
-                  data-ga={`segmento: ${s.nome}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href={orcamentoHref("segmento", s.nome)}
                   className="mt-7 flex items-center gap-2.5 border-t border-ink/[0.08] pt-5 text-[15px] font-medium text-navy transition-colors hover:text-brand"
                 >
                   <WhatsAppIcon className="h-[18px] w-[18px] shrink-0 text-[#1fa855]" />
                   {segmentos.cta}
                   <ArrowRight aria-hidden className="ml-auto h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-                </a>
+                </Link>
               </article>
             </Reveal>
           ))}

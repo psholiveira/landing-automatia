@@ -1,7 +1,8 @@
 "use client";
 
 import Reveal from "./Reveal";
-import { contato, cta } from "@/content/site";
+import Link from "next/link";
+import { contato, cta, orcamentoHref } from "@/content/site";
 import OndaPontos from "./OndaPontos";
 import Titulo from "./Titulo";
 import BtnConteudo from "./BtnConteudo";
@@ -25,15 +26,12 @@ export default function CTA() {
         </Reveal>
 
         <Reveal className="mt-10 flex w-full flex-col items-center gap-3 sm:mt-12">
-          <a
-            href={contato.whatsapp}
-            data-ga="contato"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href={orcamentoHref("contato")}
             className="btn btn-claro w-full sm:w-auto"
           >
-            <BtnConteudo seta="direita">Chamar no WhatsApp agora</BtnConteudo>
-          </a>
+            <BtnConteudo seta="direita">Pedir meu orçamento</BtnConteudo>
+          </Link>
           <div className="flex w-full flex-wrap justify-center gap-3">
             <a href={contato.emailHref} className="btn btn-contorno-claro flex-1 sm:flex-none">
               <BtnConteudo>{contato.email}</BtnConteudo>

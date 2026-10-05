@@ -16,3 +16,8 @@ export function corDaLetra(i: number, n: number) {
   const k = n > 1 ? i / (n - 1) : 0;
   return `rgb(${de.map((c, j) => Math.round(c + (ate[j] - c) * k)).join(",")})`;
 }
+
+/** Qual botão trouxe a pessoa ao orçamento, no formato do parâmetro `botao` do GA. */
+export function origemDoOrcamento(params: URLSearchParams) {
+  return [params.get("origem"), params.get("segmento")].filter(Boolean).join(": ") || "direto";
+}

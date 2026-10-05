@@ -1,9 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useRef } from "react";
 import { useReveal } from "@/hooks/useReveal";
 import Reveal from "./Reveal";
-import { agentes, contato } from "@/content/site";
+import { agentes, orcamentoHref } from "@/content/site";
 import Titulo from "./Titulo";
 import BtnConteudo from "./BtnConteudo";
 
@@ -29,15 +30,12 @@ export default function Agentes() {
             </div>
 
             <Reveal>
-              <a
-                href={contato.whatsapp}
-                data-ga="agentes"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href={orcamentoHref("agentes")}
                 className="btn btn-escuro w-full sm:w-auto"
               >
                 <BtnConteudo seta="direita">{agentes.cta}</BtnConteudo>
-              </a>
+              </Link>
             </Reveal>
           </div>
 
