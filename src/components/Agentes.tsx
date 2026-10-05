@@ -4,29 +4,26 @@ import { useRef } from "react";
 import { useReveal } from "@/hooks/useReveal";
 import Reveal from "./Reveal";
 import { agentes, contato } from "@/content/site";
-import { WhatsAppIcon } from "./WhatsApp";
 import Titulo from "./Titulo";
+import BtnConteudo from "./BtnConteudo";
 
 export default function Agentes() {
   const chatRef = useRef<HTMLDivElement>(null);
   const chatCard = useReveal<HTMLDivElement>({ y: 80, duration: 1 });
 
   return (
-    <section id="agentes" className="overflow-hidden border-b-2 border-ink bg-brand text-white">
+    <section id="agentes" className="overflow-hidden">
       <div className="shell section-y">
-        <div className="grid grid-cols-1 items-center gap-10 sm:gap-14 lg:grid-cols-[1.15fr_1fr] lg:gap-20">
-          <div className="flex flex-col gap-6 sm:gap-9">
-            <Reveal className="kicker text-skyPale">{agentes.kicker}</Reveal>
-            <Reveal>
-              <Titulo className="m-0 text-[clamp(34px,9.5vw,58px)] font-extrabold leading-[0.95] tracking-[-0.035em] lg:text-[92px] lg:leading-[0.87] lg:tracking-[-0.04em]">{agentes.titulo}</Titulo>
-            </Reveal>
-            <Reveal className="max-w-[560px] text-[16px] font-medium leading-[1.45] text-white/90 sm:text-lg lg:text-[22px] lg:leading-[1.4]">{agentes.texto}</Reveal>
+        <div className="grid grid-cols-1 items-center gap-12 sm:gap-16 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
+          <div className="flex flex-col gap-6 sm:gap-8">
+            <Titulo className="titulo-secao lg:text-[76px]">{agentes.titulo}</Titulo>
+            <Reveal className="intro-secao max-w-[540px]">{agentes.texto}</Reveal>
 
-            <div className="grid grid-cols-3 gap-3 border-t-2 border-white/50 pt-5 sm:gap-7 sm:pt-[26px]">
+            <div className="grid grid-cols-3 gap-4 border-t border-ink/[0.08] pt-6 sm:gap-8">
               {agentes.numeros.map((n) => (
                 <Reveal key={n.rotulo} className="flex flex-col gap-1.5">
-                  <div className="text-[clamp(24px,7vw,34px)] font-extrabold tracking-[-0.03em] lg:text-[44px]">{n.valor}</div>
-                  <div className="font-mono text-[10px] leading-[1.3] tracking-[0.08em] text-skyPale sm:text-xs sm:tracking-[0.1em]">{n.rotulo}</div>
+                  <div className="text-[clamp(30px,8vw,40px)] font-normal leading-none tracking-[-0.04em] text-brand lg:text-[52px]">{n.valor}</div>
+                  <div className="text-[13px] leading-[1.35] text-ash sm:text-sm">{n.rotulo}</div>
                 </Reveal>
               ))}
             </div>
@@ -36,29 +33,36 @@ export default function Agentes() {
                 href={contato.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex w-full items-center gap-3 border-2 border-ink bg-white px-5 py-4 text-[16px] font-extrabold tracking-[-0.01em] text-navy shadow-[6px_6px_0_rgba(11,42,91,0.45)] transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-skyPale sm:w-auto sm:gap-4 sm:px-7 sm:py-5 sm:text-xl"
+                className="btn btn-escuro w-full sm:w-auto"
               >
-                <WhatsAppIcon className="h-6 w-6 shrink-0 text-[#1fa855]" />
-                {agentes.cta}
-                <span className="ml-auto pl-2 font-mono font-normal transition-transform group-hover:translate-x-1">→</span>
+                <BtnConteudo seta="direita">{agentes.cta}</BtnConteudo>
               </a>
             </Reveal>
           </div>
 
-          <div ref={chatCard} className="border-2 border-ink bg-white text-ink shadow-[8px_8px_0_rgba(11,42,91,0.45)] sm:shadow-[18px_18px_0_rgba(11,42,91,0.45)]">
-            <div className="flex items-center gap-2.5 border-b-2 border-ink bg-ground px-4 py-3.5 sm:gap-3 sm:px-[22px] sm:py-[18px]">
-              <span className="h-2.5 w-2.5 shrink-0 bg-brand" />
-              <span className="font-mono text-[11px] tracking-[0.08em] sm:text-[13px] sm:tracking-[0.1em]">AGENTE AUTOMATIA · ONLINE</span>
+          <div
+            ref={chatCard}
+            className="rounded-[28px] bg-nevoa p-2 shadow-[0_40px_90px_-40px_rgba(11,42,91,0.4)] ring-1 ring-ink/[0.05]"
+          >
+            <div className="flex items-center gap-3 px-4 py-3.5 sm:px-5 sm:py-4">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-navy to-brand text-[13px] font-medium text-white">IA</span>
+              <div className="flex flex-col leading-tight">
+                <span className="text-[15px] font-medium text-ink">Agente AutomatIA</span>
+                <span className="flex items-center gap-1.5 text-[12px] text-ash">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#25D366]" />
+                  online
+                </span>
+              </div>
             </div>
 
-            <div ref={chatRef} className="flex flex-col gap-3 px-4 py-5 sm:gap-4 sm:px-[22px] sm:py-[26px]">
+            <div ref={chatRef} className="flex flex-col gap-2.5 rounded-[22px] bg-white px-4 py-5 sm:gap-3 sm:px-5 sm:py-6">
               {agentes.chat.map((m, i) => (
                 <ChatBubble key={i} texto={m.texto} de={m.de} index={i} trigger={chatRef} />
               ))}
-              <div className="flex gap-1.5 self-start border-2 border-ink bg-ground px-4 py-3.5 sm:px-[18px] sm:py-4">
-                <span className="h-2 w-2 animate-blink bg-brand" />
-                <span className="h-2 w-2 animate-blink bg-brand [animation-delay:0.2s]" />
-                <span className="h-2 w-2 animate-blink bg-brand [animation-delay:0.4s]" />
+              <div className="flex gap-1 self-start rounded-2xl rounded-bl-md bg-nevoa px-4 py-3.5">
+                <span className="h-1.5 w-1.5 animate-blink rounded-full bg-ash/60" />
+                <span className="h-1.5 w-1.5 animate-blink rounded-full bg-ash/60 [animation-delay:0.2s]" />
+                <span className="h-1.5 w-1.5 animate-blink rounded-full bg-ash/60 [animation-delay:0.4s]" />
               </div>
             </div>
           </div>
@@ -79,15 +83,15 @@ function ChatBubble({
   index: number;
   trigger: React.RefObject<Element>;
 }) {
-  const ref = useReveal<HTMLDivElement>({ y: 22, duration: 0.5, delay: index * 0.28, ease: "back.out(1.6)", trigger });
+  const ref = useReveal<HTMLDivElement>({ y: 22, duration: 0.5, delay: index * 0.28, ease: "power3.out", trigger });
   const cliente = de === "cliente";
 
   return (
     <div
       ref={ref}
       className={
-        "max-w-[86%] border-2 border-ink px-3.5 py-3 text-[15px] font-medium leading-[1.35] sm:max-w-[82%] sm:px-[18px] sm:py-4 sm:text-[17px] " +
-        (cliente ? "self-end bg-navy text-white" : "self-start bg-ground text-ink")
+        "max-w-[86%] rounded-2xl px-4 py-3 text-[15px] leading-[1.4] sm:max-w-[80%] sm:text-[16px] " +
+        (cliente ? "self-end rounded-br-md bg-brand text-white" : "self-start rounded-bl-md bg-nevoa text-ink")
       }
     >
       {texto}

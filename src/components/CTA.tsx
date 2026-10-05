@@ -2,55 +2,51 @@
 
 import Reveal from "./Reveal";
 import { contato, cta } from "@/content/site";
-import { WhatsAppIcon } from "./WhatsApp";
+import OndaPontos from "./OndaPontos";
 import Titulo from "./Titulo";
+import BtnConteudo from "./BtnConteudo";
 
+/** Único momento escuro da página: o marinho começa aqui e segue pelo rodapé. */
 export default function CTA() {
   return (
-    <section id="contato" className="overflow-hidden border-b-2 border-ink bg-navy text-white">
-      <div className="shell py-[76px] sm:py-24 lg:py-[120px]">
-        <Reveal className="kicker mb-7 text-skyMuted sm:mb-11">{cta.kicker}</Reveal>
+    <section id="contato" className="relative overflow-hidden bg-navy text-white">
+      {/* a onda do herói volta em azul-céu: a página fecha como abriu */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-[60%]">
+        <OndaPontos cor="111,171,232" className="h-full w-full opacity-60" />
+      </div>
 
-        <Titulo
-          className="m-0 max-w-[1180px] text-[clamp(34px,9.5vw,58px)] font-extrabold leading-[0.95] tracking-[-0.035em] md:text-[7.2vw] md:leading-[0.87] md:tracking-[-0.042em]"
-        >
+      <div className="shell relative flex flex-col items-center pb-[clamp(180px,26vw,300px)] pt-28 text-center sm:pt-36 lg:pt-44">
+        <Titulo className="m-0 max-w-[1000px] text-[clamp(40px,10vw,64px)] font-normal leading-[1] tracking-[-0.04em] lg:text-[96px]">
           {cta.titulo}
         </Titulo>
 
-        <div className="mt-10 grid grid-cols-1 items-end gap-9 border-t-2 border-white/40 pt-8 sm:mt-14 sm:gap-12 lg:mt-16 lg:grid-cols-2 lg:gap-16 lg:pt-11">
-          <Reveal className="max-w-[540px] text-[16px] font-medium leading-[1.45] text-white/85 sm:text-lg lg:text-[23px] lg:leading-[1.35]">
-            {cta.texto}
-          </Reveal>
+        <Reveal className="mt-6 max-w-[560px] text-[17px] leading-[1.55] text-white/70 sm:mt-8 sm:text-lg lg:text-[20px]">
+          {cta.texto}
+        </Reveal>
 
-          <Reveal className="flex flex-col gap-3.5 sm:gap-4">
-            <a
-              href={contato.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 bg-[#25D366] px-5 py-5 text-[16px] font-extrabold tracking-[-0.015em] text-ink shadow-[6px_6px_0_rgba(0,0,0,0.3)] transition-[background-color,transform] hover:-translate-y-0.5 hover:bg-white sm:gap-4 sm:px-7 sm:py-[26px] sm:text-xl lg:text-2xl"
-            >
-              <WhatsAppIcon className="h-6 w-6 shrink-0 sm:h-7 sm:w-7" />
-              <span className="min-w-0">Chamar no WhatsApp agora</span>
-              <span className="ml-auto font-mono font-normal transition-transform group-hover:translate-x-1">→</span>
-            </a>
-            <a
-              href={contato.emailHref}
-              className="flex items-center justify-between gap-3 border-2 border-white/45 px-[18px] py-[18px] text-[15px] font-semibold text-white transition-colors hover:border-white hover:bg-white/10 sm:gap-5 sm:px-[26px] sm:py-6 sm:text-lg lg:text-xl"
-            >
-              <span className="min-w-0 break-all">{contato.email}</span>
-              <span className="font-mono font-normal">→</span>
+        <Reveal className="mt-10 flex w-full flex-col items-center gap-3 sm:mt-12">
+          <a
+            href={contato.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-claro w-full sm:w-auto"
+          >
+            <BtnConteudo seta="direita">Chamar no WhatsApp agora</BtnConteudo>
+          </a>
+          <div className="flex w-full flex-wrap justify-center gap-3">
+            <a href={contato.emailHref} className="btn btn-contorno-claro flex-1 sm:flex-none">
+              <BtnConteudo>{contato.email}</BtnConteudo>
             </a>
             <a
               href={contato.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between gap-3 border-2 border-white/45 px-[18px] py-[18px] text-[15px] font-semibold text-white transition-colors hover:border-white hover:bg-white/10 sm:gap-5 sm:px-[26px] sm:py-6 sm:text-lg lg:text-xl"
+              className="btn btn-contorno-claro flex-1 sm:flex-none"
             >
-              <span className="min-w-0 break-words">Instagram {contato.handle}</span>
-              <span className="font-mono font-normal">→</span>
+              <BtnConteudo>{`Instagram ${contato.handle}`}</BtnConteudo>
             </a>
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

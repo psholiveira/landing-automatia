@@ -11,7 +11,6 @@ import Equipe from "@/components/Equipe";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
-import WhatsAppFlutuante from "@/components/WhatsApp";
 import ScrollFx from "@/components/ScrollFx";
 
 export default function Home() {
@@ -32,7 +31,6 @@ export default function Home() {
         <CTA />
       </main>
       <Footer />
-      <WhatsAppFlutuante />
       <ScrollFx />
     </>
   );

@@ -1,7 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { CircularGallery, type GalleryItem } from "@/components/ui/circular-gallery-2";
+import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
+import type { GalleryItem } from "@/components/ui/circular-gallery-2";
+
+// WebGL (ogl) num pacote à parte: não pesa no carregamento inicial da página.
+const CircularGallery = dynamic(() => import("@/components/ui/circular-gallery-2").then((m) => m.CircularGallery), {
+  ssr: false,
+});
 
 /** Largura de referência em que `bend: 3` foi calibrado. */
 const LARGURA_BASE = 1440;
@@ -24,28 +30,46 @@ function bendPara(largura: number) {
 }
 
 export default function ServicosGaleria({ items }: { items: GalleryItem[] }) {
-  const [bend, setBend] = useState(BEND_BASE);
+  const ref = useRef<HTMLDivElement>(null);
+  // null até a seção chegar perto da tela: só então a galeria monta, já com o
+  // bend certo — antes ela montava no carregamento e de novo ao corrigir o bend.
+  const [bend, setBend] = useState<number | null>(null);
 
   useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
     const sync = () => setBend(bendPara(window.innerWidth));
-    sync();
-    window.addEventListener("resize", sync);
-    window.addEventListener("orientationchange", sync);
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        io.disconnect();
+        sync();
+        window.addEventListener("resize", sync);
+        window.addEventListener("orientationchange", sync);
+      },
+      { rootMargin: "400px 0px" }
+    );
+    io.observe(el);
     return () => {
+      io.disconnect();
       window.removeEventListener("resize", sync);
       window.removeEventListener("orientationchange", sync);
     };
   }, []);
 
   return (
-    <CircularGallery
-      items={items}
-      bend={bend}
-      borderRadius={0.04}
-      scrollEase={0.04}
-      // deixa a rolagem vertical da página com o navegador e o arrasto
-      // horizontal com a galeria, em vez dos dois disputarem o mesmo gesto
-      className="touch-pan-y"
-    />
+    <div ref={ref} className="h-full w-full">
+      {bend !== null && (
+        <CircularGallery
+          items={items}
+          bend={bend}
+          borderRadius={0.04}
+          scrollEase={0.04}
+          // deixa a rolagem vertical da página com o navegador e o arrasto
+          // horizontal com a galeria, em vez dos dois disputarem o mesmo gesto
+          className="touch-pan-y"
+        />
+      )}
+    </div>
   );
 }

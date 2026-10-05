@@ -9,36 +9,31 @@ export default function AntesDepois() {
   const rule = useReveal<HTMLDivElement>({ scaleY: true });
 
   return (
-    <section className="border-b-2 border-ink bg-surface">
+    <section>
       <div className="shell section-y">
-        <Reveal className="mb-10 flex flex-col gap-4 sm:mb-14 sm:gap-5 lg:mb-16">
-          <div className="kicker text-brand">{antesDepois.kicker}</div>
-          <Titulo className="m-0 max-w-[1000px] text-[clamp(30px,8vw,52px)] font-extrabold leading-[0.98] tracking-[-0.03em] lg:text-[82px] lg:leading-[0.9] lg:tracking-[-0.038em]">
-            {antesDepois.titulo}
-          </Titulo>
-        </Reveal>
+        <Titulo className="titulo-secao mb-12 max-w-[920px] sm:mb-16 lg:mb-20">{antesDepois.titulo}</Titulo>
 
-        <div className="grid grid-cols-1 gap-10 border-t-2 border-ink pt-8 sm:gap-12 lg:grid-cols-[1fr_2px_1fr] lg:gap-14 lg:pt-10">
-          <div className="flex flex-col gap-4 sm:gap-[22px]">
-            <div className="font-mono text-[11px] tracking-[0.16em] text-smoke sm:text-[13px]">HOJE</div>
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1px_1fr] lg:gap-16">
+          <div className="flex flex-col">
+            <div className="kicker mb-4 text-ash">Hoje</div>
             {antesDepois.antes.map((t) => (
               <Reveal
                 key={t}
-                className="border-t border-rule pt-3.5 text-[19px] font-medium leading-[1.2] text-smoke line-through decoration-smoke/50 sm:pt-[18px] sm:text-[22px] lg:text-[26px] lg:leading-[1.18]"
+                className="border-t border-ink/[0.08] py-4 text-[19px] leading-[1.3] tracking-[-0.01em] text-ash line-through decoration-ash/40 sm:py-5 sm:text-[22px] lg:text-[24px]"
               >
                 {t}
               </Reveal>
             ))}
           </div>
 
-          <div ref={rule} className="hidden origin-top bg-ink lg:block" />
+          <div ref={rule} className="hidden origin-top bg-ink/[0.08] lg:block" />
 
-          <div className="flex flex-col gap-4 sm:gap-[22px]">
-            <div className="font-mono text-[11px] tracking-[0.16em] text-brand sm:text-[13px]">COM A AUTOMATIA</div>
+          <div className="flex flex-col">
+            <div className="kicker mb-4 text-brand">Com a AutomatIA</div>
             {antesDepois.depois.map((t) => (
               <Reveal
                 key={t}
-                className="border-t-2 border-ink pt-3.5 text-[19px] font-bold leading-[1.2] text-ink sm:pt-[18px] sm:text-[22px] lg:text-[26px] lg:leading-[1.18]"
+                className="border-t border-ink/[0.08] py-4 text-[19px] leading-[1.3] tracking-[-0.01em] text-navy sm:py-5 sm:text-[22px] lg:text-[24px]"
               >
                 {t}
               </Reveal>

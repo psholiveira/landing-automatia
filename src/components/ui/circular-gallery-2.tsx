@@ -77,6 +77,36 @@ function autoBind(instance: object) {
   });
 }
 
+/**
+ * O loop duplica os cards; sem cache cada duplicata subiria a mesma imagem
+ * para a GPU de novo. Aqui cada URL vira uma textura só, por contexto WebGL.
+ */
+const texturas = new WeakMap<
+  OGLRenderingContext,
+  Map<string, { texture: Texture; tamanho: Promise<[number, number]> }>
+>();
+
+function texturaCompartilhada(gl: OGLRenderingContext, src: string) {
+  let porGl = texturas.get(gl);
+  if (!porGl) texturas.set(gl, (porGl = new Map()));
+  let t = porGl.get(src);
+  if (!t) {
+    const texture = new Texture(gl, { generateMipmaps: true });
+    const tamanho = new Promise<[number, number]>((ok) => {
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.src = src;
+      img.onload = () => {
+        texture.image = img;
+        ok([img.naturalWidth, img.naturalHeight]);
+      };
+    });
+    t = { texture, tamanho };
+    porGl.set(src, t);
+  }
+  return t;
+}
+
 function createTextTexture(
   gl: OGLRenderingContext,
   text: string,
@@ -262,9 +292,7 @@ class Media {
   }
 
   createShader() {
-    const texture = new Texture(this.gl, {
-      generateMipmaps: true,
-    });
+    const { texture, tamanho } = texturaCompartilhada(this.gl, this.image);
     this.program = new Program(this.gl, {
       depthTest: false,
       depthWrite: false,
@@ -328,16 +356,9 @@ class Media {
       transparent: true,
     });
 
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.src = this.image;
-    img.onload = () => {
-      texture.image = img;
-      this.program.uniforms.uImageSizes.value = [
-        img.naturalWidth,
-        img.naturalHeight,
-      ];
-    };
+    tamanho.then((t) => {
+      this.program.uniforms.uImageSizes.value = t;
+    });
   }
 
   createMesh() {

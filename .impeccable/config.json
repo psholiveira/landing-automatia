@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "gradient-text",
+        "value": "*",
+        "files": [
+          "src/components/Hero.tsx"
+        ],
+        "createdAt": "2026-10-04T22:01:43.997Z",
+        "reason": "user asked for the hero to match the automatia.me reference, whose tagline uses a blue gradient"
+      }
+    ]
+  }
+}

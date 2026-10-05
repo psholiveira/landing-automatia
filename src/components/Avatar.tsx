@@ -25,12 +25,12 @@ export default function Avatar({
   return (
     <div
       data-parallax-img={parallax || undefined}
-      className={cn("relative grid shrink-0 place-items-center overflow-hidden border-2 border-ink bg-brand text-white", className)}
+      className={cn("relative grid shrink-0 place-items-center overflow-hidden bg-gradient-to-br from-navy to-brand text-white", className)}
     >
       {foto ? (
         <Image src={foto} alt={nome} fill sizes="(min-width: 1024px) 400px, 90vw" className="object-cover" />
       ) : (
-        <span aria-hidden className="font-extrabold tracking-[-0.03em]">{iniciais}</span>
+        <span aria-hidden className="font-normal tracking-[-0.03em]">{iniciais}</span>
       )}
     </div>
   );

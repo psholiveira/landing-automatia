@@ -9,3 +9,6 @@ next-env.d.ts
 AGENTS.md
 CLAUDE.md
 .claude*
+
+# cache de sessão do Impeccable (o config.json do projeto é versionado)
+.impeccable/hook.cache.json

@@ -22,8 +22,10 @@ const H = 900;
 const STROKE = 8;
 /** Raster de saída em múltiplo do viewBox lógico — os planos da galeria 3D
  * renderizam bem maiores que 800x600 na tela, então sem isso o navegador
- * rasteriza o SVG offscreen no tamanho intrínseco e a textura sai borrada. */
-const RASTER_SCALE = 3;
+ * rasteriza o SVG offscreen no tamanho intrínseco e a textura sai borrada.
+ * 1.25 cobre o card no maior tamanho (≈744px de altura numa tela 2x). Era 3:
+ * 18 texturas de 2100x2700 travavam a abertura da página. */
+const RASTER_SCALE = 1.25;
 
 /** Ícones simples em traço, desenhados à mão num box ~240x240 centrado em (400,380). */
 const icons = {

@@ -15,7 +15,7 @@ type Props = {
 /**
  * Título que entra palavra por palavra ao chegar na tela.
  * Sem máscara de corte de propósito: com entrelinha apertada (0.9) ela
- * cortaria acentos e cedilhas — o desfoque + subida dá o mesmo efeito.
+ * cortaria acentos e cedilhas. Sem blur: em muitos títulos ele pesava na rolagem.
  */
 export default function Titulo({ as: Tag = "h2", className, children }: Props) {
   const ref = useRef<HTMLHeadingElement>(null);
@@ -29,7 +29,6 @@ export default function Titulo({ as: Tag = "h2", className, children }: Props) {
       gsap.from(words, {
         yPercent: 70,
         opacity: 0,
-        filter: "blur(8px)",
         duration: 1,
         ease: "power4.out",
         stagger: 0.05,

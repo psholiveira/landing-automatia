@@ -8,17 +8,16 @@ export default function Equipe() {
   if (!visivel(equipe.rascunho)) return null;
 
   return (
-    <section id="equipe" className="border-b-2 border-ink bg-white">
+    <section id="equipe">
       <div className="shell section-y">
         <AvisoRascunho rascunho={equipe.rascunho} />
 
         <div className="grid grid-cols-1 gap-10 sm:gap-14 lg:grid-cols-[1fr_1.5fr] lg:gap-20">
           <Reveal className="flex flex-col gap-4 sm:gap-5 lg:sticky lg:top-28 lg:self-start">
-            <div className="kicker text-brand">{equipe.kicker}</div>
-            <Titulo className="m-0 text-[clamp(30px,8vw,52px)] font-extrabold leading-[0.98] tracking-[-0.03em] lg:text-[64px] lg:leading-[0.92] lg:tracking-[-0.038em]">
+            <Titulo className="titulo-secao lg:text-[60px]">
               {equipe.titulo}
             </Titulo>
-            <p className="m-0 mt-2 max-w-[440px] text-[16px] font-medium leading-[1.45] text-ink/75 sm:text-lg lg:text-xl lg:leading-[1.4]">
+            <p className="intro-secao mt-1 max-w-[420px]">
               {equipe.texto}
             </p>
           </Reveal>
@@ -31,12 +30,12 @@ export default function Equipe() {
                     nome={p.nome}
                     foto={p.foto}
                     parallax
-                    className="aspect-[3/4] w-full text-[clamp(48px,12vw,96px)] shadow-[8px_8px_0_#201e1d]"
+                    className="aspect-[3/4] w-full rounded-3xl text-[clamp(48px,12vw,96px)]"
                   />
                   <div className="flex flex-col gap-1 pt-2">
-                    <h3 className="m-0 text-[24px] font-extrabold tracking-[-0.025em] sm:text-[28px]">{p.nome}</h3>
-                    <span className="font-mono text-[11px] tracking-[0.12em] text-brand sm:text-xs">{p.cargo.toUpperCase()}</span>
-                    <p className="m-0 mt-2 text-[16px] font-medium leading-[1.45] text-ink/75">{p.bio}</p>
+                    <h3 className="m-0 text-[24px] font-normal tracking-[-0.03em] text-navy sm:text-[28px]">{p.nome}</h3>
+                    <span className="kicker text-brand">{p.cargo}</span>
+                    <p className="m-0 mt-2 text-[16px] leading-[1.55] text-ash">{p.bio}</p>
                   </div>
                 </article>
               </Reveal>

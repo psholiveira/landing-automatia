@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import Reveal from "./Reveal";
 import { WhatsAppIcon } from "./WhatsApp";
 import { segmentos, whatsappCom } from "@/content/site";
@@ -5,47 +6,37 @@ import Titulo from "./Titulo";
 
 export default function Segmentos() {
   return (
-    <section id="para-quem" className="border-b-2 border-ink bg-ink text-white">
+    <section id="para-quem">
       <div className="shell section-y">
-        <div className="mb-10 grid grid-cols-1 items-end gap-6 sm:mb-14 lg:mb-16 lg:grid-cols-2 lg:gap-16">
-          <Reveal className="flex flex-col gap-4 sm:gap-5">
-            <div className="kicker text-sky">{segmentos.kicker}</div>
-            <Titulo className="m-0 text-[clamp(30px,8vw,52px)] font-extrabold leading-[0.98] tracking-[-0.03em] lg:text-[68px] lg:leading-[0.92] lg:tracking-[-0.038em]">
-              {segmentos.titulo}
-            </Titulo>
-          </Reveal>
-          <Reveal className="max-w-[480px] text-[16px] font-medium leading-[1.45] text-white/75 sm:text-lg lg:text-[21px] lg:leading-[1.4]">
-            {segmentos.intro}
-          </Reveal>
+        <div className="mb-12 grid grid-cols-1 items-end gap-6 sm:mb-16 sm:gap-8 lg:mb-20 lg:grid-cols-2 lg:gap-16">
+          <Titulo className="titulo-secao">{segmentos.titulo}</Titulo>
+          <Reveal className="intro-secao max-w-[480px]">{segmentos.intro}</Reveal>
         </div>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 xl:grid-cols-4">
           {segmentos.itens.map((s, i) => (
             <Reveal key={s.nome} delay={i * 0.08} className="h-full">
-              <article className="group flex h-full flex-col border-2 border-white/25 bg-white/[0.03] transition-colors hover:border-sky hover:bg-white/[0.06]">
-                <div className="flex items-baseline justify-between gap-4 border-b-2 border-white/15 px-5 py-5 sm:px-6">
-                  <h3 className="m-0 text-[22px] font-extrabold leading-[1.05] tracking-[-0.025em] sm:text-[24px]">{s.nome}</h3>
-                  <span className="font-mono text-xs text-sky">{String(i + 1).padStart(2, "0")}</span>
-                </div>
-                <div className="flex flex-1 flex-col gap-5 px-5 py-5 sm:px-6">
+              <article className="group flex h-full flex-col rounded-3xl bg-nevoa p-6 transition-[background-color,box-shadow] duration-300 hover:bg-white hover:shadow-[0_24px_60px_-28px_rgba(11,42,91,0.35)] hover:ring-1 hover:ring-ink/[0.06] sm:p-7">
+                <h3 className="m-0 text-[24px] font-normal leading-[1.1] tracking-[-0.025em] text-navy">{s.nome}</h3>
+                <div className="mt-6 flex flex-1 flex-col gap-5">
                   <div className="flex flex-col gap-1.5">
-                    <span className="font-mono text-[11px] tracking-[0.14em] text-smoke">{segmentos.dorRotulo}</span>
-                    <p className="m-0 text-[16px] font-medium leading-[1.4] text-white/60 line-through decoration-white/25">{s.dor}</p>
+                    <span className="kicker text-ash">{segmentos.dorRotulo}</span>
+                    <p className="m-0 text-[16px] leading-[1.45] text-ash line-through decoration-ash/40">{s.dor}</p>
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <span className="font-mono text-[11px] tracking-[0.14em] text-sky">{segmentos.entregaRotulo}</span>
-                    <p className="m-0 text-[16px] font-bold leading-[1.4]">{s.entrega}</p>
+                    <span className="kicker text-brand">{segmentos.entregaRotulo}</span>
+                    <p className="m-0 text-[16px] font-medium leading-[1.45] text-ink">{s.entrega}</p>
                   </div>
                 </div>
                 <a
                   href={whatsappCom(s.mensagem)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-auto flex items-center gap-2.5 border-t-2 border-white/15 px-5 py-4 text-[15px] font-extrabold text-white transition-colors hover:bg-brand sm:px-6"
+                  className="mt-7 flex items-center gap-2.5 border-t border-ink/[0.08] pt-5 text-[15px] font-medium text-navy transition-colors hover:text-brand"
                 >
-                  <WhatsAppIcon className="h-5 w-5 shrink-0 text-[#25D366]" />
+                  <WhatsAppIcon className="h-[18px] w-[18px] shrink-0 text-[#1fa855]" />
                   {segmentos.cta}
-                  <span className="ml-auto font-mono font-normal transition-transform group-hover:translate-x-1">→</span>
+                  <ArrowRight aria-hidden className="ml-auto h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
                 </a>
               </article>
             </Reveal>

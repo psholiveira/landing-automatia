@@ -9,7 +9,7 @@
     overflow-x: clip;
   }
   body {
-    @apply bg-ground text-ink antialiased;
+    @apply bg-white text-ink antialiased;
     overflow-x: clip;
     -webkit-tap-highlight-color: transparent;
   }
@@ -26,9 +26,17 @@
 }
 
 @layer components {
-  /* rótulo mono usado em todos os kickers de seção */
+  /* rótulo curto sobre um conteúdo (O desafio, Hoje…): sans, pequeno, sem caixa alta */
   .kicker {
-    @apply font-mono text-[11px] tracking-[0.18em] sm:text-[13px] sm:tracking-[0.2em];
+    @apply text-[13px] font-medium tracking-[-0.005em] sm:text-sm;
+  }
+  /* título de seção na voz do herói: peso regular, grande e justo */
+  .titulo-secao {
+    @apply m-0 text-[clamp(34px,8.4vw,52px)] font-normal leading-[1.02] tracking-[-0.035em] text-navy lg:text-[68px] lg:leading-[1];
+  }
+  /* parágrafo de abertura de seção */
+  .intro-secao {
+    @apply m-0 text-[17px] leading-[1.55] text-ash sm:text-lg lg:text-[20px] lg:leading-[1.5];
   }
   /* container padrão de seção */
   .shell {
@@ -36,7 +44,7 @@
   }
   /* respiro vertical padrão das seções */
   .section-y {
-    @apply py-[72px] sm:py-24 lg:py-[110px];
+    @apply py-24 sm:py-32 lg:py-40;
   }
   /*
    * Elementos que nascem invisíveis e só aparecem quando a timeline do GSAP
@@ -53,53 +61,119 @@
   }
 
   /*
-   * Cortina de abertura do herói. É CSS puro de propósito: abre sozinha mesmo
-   * que o JS demore ou falhe, então nunca deixa o herói tampado.
+   * Botões: um sistema só, minimalista — pílula lisa, peso médio, sem ícone de
+   * enfeite. O movimento vem do miolo (BtnConteudo). Combine .btn com uma cor.
    */
-  .cortina {
-    animation: cortina-abre 0.9s cubic-bezier(0.77, 0, 0.18, 1) 0.3s both;
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-5 py-3 text-[15px] font-medium leading-tight tracking-[-0.01em] transition-[background-color,border-color,color,transform] duration-300 active:scale-[0.97];
   }
-  .cortina-linha {
-    animation: cortina-linha 0.75s cubic-bezier(0.65, 0, 0.35, 1) both;
+  .btn-sm {
+    @apply px-4 py-2.5 text-[14px];
   }
-  @keyframes cortina-abre {
-    to {
-      transform: scaleY(0);
+  /* sobre fundo claro */
+  .btn-escuro {
+    @apply bg-navy text-white hover:bg-brand;
+  }
+  .btn-contorno {
+    @apply border border-ink/[0.12] text-navy hover:border-transparent hover:bg-nevoa;
+  }
+  /* sobre fundo escuro */
+  .btn-claro {
+    @apply bg-white text-navy hover:bg-skyPale;
+  }
+  .btn-contorno-claro {
+    @apply border border-white/20 text-white hover:border-transparent hover:bg-white/10;
+  }
+
+  /*
+   * Miolo animado dos botões (ver BtnConteudo). O rótulo rola para cima e a
+   * cópia sobe por baixo; a seta sai por um lado e a cópia entra pelo outro,
+   * um instante depois. A folga vertical evita cortar acentos e descendentes.
+   */
+  .btn-rotulo {
+    @apply relative inline-block overflow-hidden;
+    padding-block: 0.15em;
+    margin-block: -0.15em;
+  }
+  .btn-rotulo > span {
+    @apply block;
+    transition: transform 460ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-rotulo > span + span {
+    @apply absolute inset-x-0;
+    top: 0.15em;
+    transform: translateY(130%);
+  }
+  .btn-seta {
+    @apply relative inline-block h-4 w-4 shrink-0 overflow-hidden;
+  }
+  .btn-seta > svg {
+    @apply absolute inset-0 h-4 w-4;
+    transition: transform 460ms cubic-bezier(0.16, 1, 0.3, 1) 50ms;
+  }
+  .btn-seta > svg + svg {
+    transform: translateX(-130%);
+  }
+  .btn-seta-diagonal > svg + svg {
+    transform: translate(-130%, 130%);
+  }
+  @media (hover: hover) {
+    :hover > .btn-rotulo > span:first-child {
+      transform: translateY(-130%);
+    }
+    :hover > .btn-rotulo > span + span,
+    :hover > .btn-seta > svg + svg {
+      transform: none;
+    }
+    :hover > .btn-seta > svg:first-child {
+      transform: translateX(130%);
+    }
+    :hover > .btn-seta-diagonal > svg:first-child {
+      transform: translate(130%, -130%);
     }
   }
-  @keyframes cortina-linha {
-    0% {
-      transform: scaleX(0);
-    }
-    45% {
-      transform: scaleX(1);
-      opacity: 1;
-    }
-    100% {
-      transform: scaleX(1);
-      opacity: 0;
-    }
+  :focus-visible > .btn-rotulo > span:first-child {
+    transform: translateY(-130%);
+  }
+  :focus-visible > .btn-rotulo > span + span {
+    transform: none;
   }
   @media (prefers-reduced-motion: reduce) {
-    .cortina,
-    .cortina-linha {
-      display: none;
+    .btn-rotulo > span,
+    .btn-seta > svg {
+      transition: none;
     }
   }
 
-  /* reflexo que varre o texto em destaque do herói (a posição é animada via GSAP) */
-  .brilho {
-    background-image: linear-gradient(100deg, #6fabe8 0%, #6fabe8 42%, #ffffff 50%, #6fabe8 58%, #6fabe8 100%);
-    background-size: 250% 100%;
-    background-position: 100% 0;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  /*
+   * Letra do menu que rola no hover do link (.group): a cópia em ::after (empilhada embaixo) sobe
+   * no lugar da original, em cascata pelo --i. A volta é mais curta que a ida.
+   * A caixa é mais alta que a entrelinha do título para não cortar ç, g e acentos.
+   */
+  .rolante {
+    @apply inline-block overflow-hidden align-top;
+    line-height: 1.2;
+    height: 1.2em;
   }
-
-  /* granulado de filme, estático (animar ruído custa caro em celular) */
-  .grao {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  .rolante > span {
+    @apply block;
+    transition: transform 320ms cubic-bezier(0.77, 0, 0.175, 1);
+    transition-delay: min(calc(var(--i) * 8ms), 120ms);
+  }
+  .rolante > span::after {
+    content: attr(data-c);
+    @apply block text-sky;
+  }
+  .group:hover .rolante > span,
+  .group:focus-visible .rolante > span {
+    transform: translateY(-50%);
+    transition-duration: 560ms;
+    transition-delay: min(calc(var(--i) * 16ms), 240ms);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rolante > span {
+      transition: none;
+    }
   }
 
   /* carrossel horizontal com snap — usado no mobile */

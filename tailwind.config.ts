@@ -16,6 +16,8 @@ const config: Config = {
         ash: "#605d5d",
         smoke: "#8b8787",
         rule: "#dcd8d8",
+        // superfície fria e quase branca: cards e painéis no mundo claro do herói
+        nevoa: "#f3f6fa",
       },
       fontFamily: {
         sans: ["var(--font-archivo)", "system-ui", "sans-serif"],
@@ -27,7 +29,7 @@ const config: Config = {
       },
       animation: {
         blink: "blink 1.4s steps(1) infinite",
-        marquee: "marquee 40s linear infinite",
+        marquee: "marquee 80s linear infinite",
       },
       borderRadius: { none: "0px" },
     },

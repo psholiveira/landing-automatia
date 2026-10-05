@@ -1,37 +1,69 @@
+import Image from "next/image";
 import { integracoes } from "@/content/site";
 
-function Lista({ copia }: { copia?: boolean }) {
+/**
+ * Altura de cada logo para que todas pesem parecido: logos largas ficam mais
+ * baixas, ícones quadrados mais altos (área ~constante), com teto para os ícones.
+ */
+const altura = (proporcao: number) => Math.round(Math.min(34, 26 * Math.sqrt(3 / proporcao)));
+
+/**
+ * Uma volta do letreiro. As logos aparecem duas vezes dentro dela para a volta
+ * ser mais larga que qualquer tela (uma vez só mede ~1.800px e abriria um buraco
+ * em monitores grandes). A repetição é só visual: fica fora do leitor de tela e
+ * some quando o movimento está desligado.
+ */
+function Volta({ copia }: { copia?: boolean }) {
   return (
     <ul
       aria-hidden={copia}
       className={
-        "m-0 flex shrink-0 list-none items-center gap-8 p-0 pr-8 sm:gap-12 sm:pr-12 motion-reduce:shrink motion-reduce:flex-wrap motion-reduce:gap-y-3 motion-reduce:px-5" +
+        "m-0 flex shrink-0 list-none items-center gap-14 p-0 pr-14 sm:gap-20 sm:pr-20 motion-reduce:shrink motion-reduce:flex-wrap motion-reduce:justify-center motion-reduce:gap-y-8 motion-reduce:px-5" +
         (copia ? " motion-reduce:hidden" : "")
       }
     >
-      {integracoes.itens.map((nome) => (
-        <li key={nome} className="flex items-center gap-8 whitespace-nowrap text-[19px] font-extrabold tracking-[-0.02em] text-ink/70 sm:gap-12 sm:text-[26px]">
-          {nome}
-          <span aria-hidden className="h-2 w-2 bg-brand" />
-        </li>
-      ))}
+      {[0, 1].map((rep) =>
+        integracoes.itens.map((it) => {
+          const h = altura(it.proporcao);
+          const decorativa = copia || rep > 0;
+          return (
+            <li
+              key={`${rep}-${it.nome}`}
+              aria-hidden={rep > 0 || undefined}
+              className={"shrink-0" + (rep > 0 ? " motion-reduce:hidden" : "")}
+              style={{ "--h": `${h}px` } as React.CSSProperties}
+            >
+              <Image
+                src={it.logo}
+                alt={decorativa ? "" : it.nome}
+                width={Math.round(h * it.proporcao)}
+                height={h}
+                // fora da tela o letreiro ainda vai trazê-las: carregar já evita que surjam do nada
+                loading="eager"
+                className="h-[calc(var(--h)*0.8)] w-auto sm:h-[var(--h)]"
+              />
+            </li>
+          );
+        })
+      )}
     </ul>
   );
 }
 
 export default function Integracoes() {
   return (
-    <section aria-label={integracoes.rotulo} className="border-b-2 border-ink bg-white">
-      <div className="flex flex-col lg:flex-row lg:items-stretch">
-        <div className="shell flex items-center pb-0 pt-6 lg:mx-0 lg:w-auto lg:shrink-0 lg:border-r-2 lg:border-ink lg:py-8">
-          <p className="kicker m-0 text-brand">{integracoes.rotulo}</p>
-        </div>
-        {/* Duas cópias lado a lado: a animação anda metade da largura e recomeça sem emenda. */}
-        <div className="group relative flex overflow-hidden py-6 [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)] lg:py-8">
-          <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused] motion-reduce:w-auto motion-reduce:animate-none motion-reduce:flex-wrap">
-            <Lista />
-            <Lista copia />
-          </div>
+    <section aria-label={integracoes.rotulo} className="border-y border-ink/[0.07] bg-white py-10 sm:py-14">
+      <p className="kicker shell m-0 mb-8 text-center text-ash sm:mb-10">{integracoes.rotulo}</p>
+      <div className="relative flex overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
+        {/*
+         * Duas voltas idênticas lado a lado: a animação anda metade do trilho (uma
+         * volta exata) e recomeça sem emenda. O shrink-0 é o que garante isso — sem
+         * ele o flex comprimia o trilho, os -50% caíam no meio da volta e a faixa
+         * pulava de volta ao início.
+         */}
+        <div className="flex w-max shrink-0 animate-marquee motion-reduce:w-auto motion-reduce:shrink motion-reduce:animate-none motion-reduce:flex-wrap">
+          <Volta />
+          <Volta copia />
         </div>
       </div>
     </section>

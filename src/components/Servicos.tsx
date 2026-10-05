@@ -3,7 +3,7 @@ import { join } from "node:path";
 import Reveal from "./Reveal";
 import { servicos } from "@/content/site";
 import ServicosGaleria from "./ServicosGaleria";
-import { type GalleryItem } from "@/components/ui/circular-gallery-2";
+import type { GalleryItem } from "@/components/ui/circular-gallery-2";
 import Titulo from "./Titulo";
 
 /**
@@ -29,43 +29,36 @@ const galleryItems: GalleryItem[] = servicos.itens.map((s) => ({
 
 export default function Servicos() {
   return (
-    <section id="servicos" className="border-b-2 border-ink">
-      <div className="shell pt-[72px] sm:pt-24 lg:pt-[110px]">
-        <div className="grid grid-cols-1 items-end gap-7 border-b-2 border-ink pb-10 sm:gap-10 lg:grid-cols-2 lg:gap-16 lg:pb-14">
-          <Reveal className="flex flex-col gap-4 sm:gap-5">
-            <div className="kicker text-brand">{servicos.kicker}</div>
-            <Titulo className="m-0 text-[clamp(32px,8.6vw,56px)] font-extrabold leading-[0.92] tracking-[-0.03em] lg:text-[76px] lg:leading-[0.9] lg:tracking-[-0.035em]">
-              {servicos.titulo[0]}
-              <br />
-              {servicos.titulo[1]}
-            </Titulo>
-          </Reveal>
-          <Reveal className="max-w-[520px] text-[16px] font-medium leading-[1.45] text-ink/75 sm:text-lg lg:text-[21px] lg:leading-[1.4]">
-            {servicos.intro}
-          </Reveal>
+    <section id="servicos">
+      <div className="shell pt-24 sm:pt-32 lg:pt-40">
+        <div className="grid grid-cols-1 items-end gap-6 sm:gap-8 lg:grid-cols-2 lg:gap-16">
+          <Titulo className="titulo-secao">
+            {servicos.titulo[0]}
+            <br />
+            {servicos.titulo[1]}
+          </Titulo>
+          <Reveal className="intro-secao max-w-[500px]">{servicos.intro}</Reveal>
         </div>
       </div>
 
-      <Reveal y={40} className="relative h-[480px] w-full sm:h-[620px]">
+      <Reveal y={40} className="relative mt-6 h-[480px] w-full sm:mt-10 sm:h-[620px]">
         <ServicosGaleria items={galleryItems} />
       </Reveal>
 
-      <div className="shell flex flex-col gap-5 pb-12 pt-4 sm:pb-16 lg:pt-6">
-        <p className="kicker m-0 text-smoke">ARRASTE PARA NAVEGAR · OU VEJA TUDO DE UMA VEZ:</p>
+      <div className="shell flex flex-col items-center gap-5 pb-8 pt-4 text-center lg:pt-6">
+        <p className="kicker m-0 text-ash">Arraste para navegar, ou veja tudo de uma vez:</p>
         {/* Os cards da galeria são imagens; esta lista deixa os serviços legíveis de relance e indexáveis. */}
-        <ul className="m-0 flex list-none flex-wrap gap-2 p-0 sm:gap-2.5">
+        <ul className="m-0 flex max-w-[980px] list-none flex-wrap justify-center gap-2 p-0 sm:gap-2.5">
           {servicos.itens.map((s) => (
             <li
               key={s.n}
-              className="flex items-center gap-2 border-2 border-ink bg-white px-3 py-2 text-[14px] font-bold tracking-[-0.01em] sm:px-4 sm:py-2.5 sm:text-[16px]"
+              className="rounded-full bg-nevoa px-4 py-2 text-[14px] tracking-[-0.01em] text-ink sm:px-5 sm:py-2.5 sm:text-[15px]"
             >
-              <span className="font-mono text-[11px] font-normal text-brand sm:text-xs">{s.n}</span>
               {s.nome}
             </li>
           ))}
         </ul>
       </div>
-
     </section>
   );
 }
