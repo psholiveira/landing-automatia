@@ -34,6 +34,7 @@ export default function ServicosGaleria({ items }: { items: GalleryItem[] }) {
   // null até a seção chegar perto da tela: só então a galeria monta, já com o
   // bend certo — antes ela montava no carregamento e de novo ao corrigir o bend.
   const [bend, setBend] = useState<number | null>(null);
+  const [semWebGL, setSemWebGL] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -59,8 +60,22 @@ export default function ServicosGaleria({ items }: { items: GalleryItem[] }) {
 
   return (
     <div ref={ref} className="h-full w-full">
-      {bend !== null && (
+      {semWebGL ? (
+        // mesmos cards, sem 3D: uma faixa com rolagem horizontal nativa
+        <div className="flex h-full snap-x snap-mandatory gap-4 overflow-x-auto px-5 py-6 sm:gap-6 sm:px-8 lg:px-10">
+          {items.map((item) => (
+            <img
+              key={item.image}
+              src={item.image}
+              alt=""
+              loading="lazy"
+              className="h-full w-auto shrink-0 snap-center rounded-[22px]"
+            />
+          ))}
+        </div>
+      ) : bend !== null && (
         <CircularGallery
+          onFalha={() => setSemWebGL(true)}
           items={items}
           bend={bend}
           borderRadius={0.04}

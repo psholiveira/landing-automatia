@@ -28,6 +28,11 @@ interface CircularGalleryProps
    */
   items?: GalleryItem[];
   /**
+   * Chamado quando o WebGL não está disponível (GPU desligada, contextos
+   * esgotados…) e a galeria não consegue montar.
+   */
+  onFalha?: () => void;
+  /**
    * The amount of curvature. Higher values create a stronger bend.
    * @default 3
    */
@@ -720,6 +725,7 @@ const CircularGallery = ({
   scrollEase = 0.05,
   className,
   fontClassName,
+  onFalha,
   ...props
 }: CircularGalleryProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -736,15 +742,22 @@ const CircularGallery = ({
 
     const computedFont = `${computedFontWeight} ${computedFontSize} ${computedFontFamily}`;
 
-    const app = new App(containerRef.current, {
-      items,
-      bend,
-      textColor: computedColor,
-      borderRadius,
-      font: computedFont,
-      scrollSpeed,
-      scrollEase,
-    });
+    // Sem WebGL o ogl lança no construtor; sem este catch o erro derruba a página inteira.
+    let app: App;
+    try {
+      app = new App(containerRef.current, {
+        items,
+        bend,
+        textColor: computedColor,
+        borderRadius,
+        font: computedFont,
+        scrollSpeed,
+        scrollEase,
+      });
+    } catch {
+      onFalha?.();
+      return;
+    }
 
     return () => {
       app.destroy();
