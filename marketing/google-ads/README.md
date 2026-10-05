@@ -14,7 +14,7 @@ node marketing/google-ads/campanha.mjs   # confere os limites do Google Ads e re
 | Tipo | Pesquisa (só Rede de Pesquisa do Google) | Pega quem já está procurando a solução. Display, Parceiros de Pesquisa e Performance Max queimam verba pequena com tráfego frio. |
 | Objetivo | Leads → clique no WhatsApp | É a única conversão do site. |
 | Orçamento | **R$ 100/semana → R$ 14/dia** (~R$ 430/mês) | O Google só aceita orçamento diário. Em alguns dias ele gasta até o dobro, mas compensa nos outros: no mês, nunca passa de 30,4 × R$ 14. |
-| Foco | **Só 2 grupos ativos**: Chatbot WhatsApp e Clínicas | Com R$ 14/dia, mais grupos dividem a verba em migalhas e nenhum junta dados. Os dois vendem a mesma coisa (agente de IA no WhatsApp), que é o carro-chefe do site. Os outros 3 grupos já vão no CSV, **pausados**, para ligar quando o orçamento crescer. |
+| Foco | **5 grupos ativos**, um por serviço | O orçamento é da campanha, não de cada grupo: o Google gasta onde aparecem buscas. Grupos separados servem para o anúncio repetir o que a pessoa buscou. O risco é um serviço de busca barata e volumosa (sites) engolir a verba — ver a rotina abaixo. |
 | Lances | **Maximizar cliques** com CPC máx. de **R$ 3** | Acima disso, um clique come 1/5 do dia. Com esse volume é difícil chegar às ~15 conversões/mês que o "Maximizar conversões" precisa — só troque se chegar lá. |
 | Local | **Paraíba e Pernambuco**, opção **"Presença"** (pessoas *no* local, não "interessadas") | Orçamento pequeno pede área pequena: CPC menor que em SP, e é onde estão os cases (João Pessoa e Recife) e o DDD 83. Expanda para o Nordeste quando sobrar verba. |
 | Idioma | Português | |
@@ -25,15 +25,17 @@ node marketing/google-ads/campanha.mjs   # confere os limites do Google Ads e re
 
 | Grupo | Status | Exemplos de palavras-chave | Ticket / intenção |
 | --- | --- | --- | --- |
-| Chatbot WhatsApp e Agentes de IA | **Ativo** | chatbot para whatsapp, agente de ia para atendimento | Principal: é o carro-chefe do site |
-| Clínicas e Consultórios | **Ativo** | chatbot para clínica, agendamento automático whatsapp | Nicho com dor clara, intenção alta e menos concorrência |
-| Landing Pages | Pausado | criação de landing page, landing page profissional | Próximo a ligar: ticket menor, venda mais fácil |
-| Automação de Processos com IA | Pausado | automação de processos com ia, integração whatsapp com crm | Alto ticket, volume menor |
-| Sistemas e Software Sob Medida | Pausado | sistema sob medida, empresa de desenvolvimento de software | CPC caro demais para R$ 14/dia |
+| Chatbot WhatsApp e Agentes de IA | Ativo | chatbot para whatsapp, agente de ia para atendimento | Carro-chefe do site |
+| Clínicas e Consultórios | Ativo | chatbot para clínica, agendamento automático whatsapp | Nicho com dor clara, intenção alta e menos concorrência |
+| Sites e Landing Pages | Ativo | criação de sites para empresas, site para empresa, criação de landing page | Muito volume e muito curioso: o mais provável de engolir a verba |
+| Automação para Empresas | Ativo | automação para empresas, automação de processos, empresa de automação | "Automação" sozinha também é elétrica/industrial — as negativas cuidam disso |
+| Sistemas e Software Sob Medida | Ativo | desenvolvimento de sistemas, sistema para empresa, empresa de software | Alto ticket, CPC mais caro |
 
 Cada grupo tem 1 anúncio responsivo com 15 títulos e 4 descrições. Três títulos são comuns a
 todos: *Diagnóstico gratuito de 30 min*, *Preço e prazo fechados*, *Fale com quem constrói*.
-São 51 negativas de campanha (grátis, curso, como fazer, vaga, chatgpt, wix…), todas em `campanha.mjs`.
+São 64 negativas de campanha (grátis, curso, como fazer, vaga, chatgpt, wix…), todas em `campanha.mjs`.
+As palavras gerais trazem armadilhas próprias, também negativadas: *automação residencial/industrial/comercial*
+(CLP, portão, caixa de loja) e, em sites, quem quer *hospedagem*, *domínio*, *Google Sites* ou o mais *barato*.
 
 ## Passo a passo
 
@@ -81,7 +83,7 @@ Crie no nível da campanha (os textos já estão validados em `campanha.mjs`):
 
 - [ ] Conversão `Lead - WhatsApp` importada e marcada como principal
 - [ ] Faturamento configurado e verificação do anunciante iniciada
-- [ ] Orçamento R$ 14/dia, CPC máx. R$ 3, só os grupos Chatbot e Clínicas ativos
+- [ ] Orçamento R$ 14/dia, CPC máx. R$ 3, os 5 grupos ativos
 - [ ] Local Paraíba + Pernambuco ("Presença"), só Rede de Pesquisa, idioma português
 - [ ] Revisar as promessas usadas nos anúncios: "1ª entrega em até 2 semanas", "Resposta em 30 segundos", "Orçamento em 2 minutos" (o README do site já pede essa revisão)
 - [ ] Alguém pronto para responder o WhatsApp rápido nos horários da campanha
@@ -92,9 +94,10 @@ Crie no nível da campanha (os textos já estão validados em `campanha.mjs`):
 | --- | --- |
 | Dias 1–14, a cada 2–3 dias | **Termos de pesquisa**: negativar tudo que não é cliente (estudante, DIY, ferramenta grátis). Com R$ 14/dia, cada clique errado pesa — é o que mais economiza verba. |
 | Semanal | Anotar numa planilha as conversas do WhatsApp que vieram do Google (pergunte "como nos achou?"), quantas viraram reunião e quantas fecharam. Comparar com os R$ 100 da semana. |
-| Semana 4–6 | Palavra-chave com 30+ cliques e nenhuma conversa: pausar. Se um dos dois grupos não trouxe conversa nenhuma, passe a verba toda para o outro. |
+| Toda semana | Em **Grupos de anúncios**, veja a coluna Custo. Se um grupo levar mais da metade da verba sem trazer conversa (o suspeito é "Sites e Landing Pages"), pause as palavras mais genéricas dele ou o grupo inteiro. |
+| Semana 4–6 | Palavra-chave com 30+ cliques e nenhuma conversa: pausar. Grupo sem nenhuma conversa: pausar e deixar a verba para os que trazem. |
 | Se a verba não gastar | Se a campanha gastar bem menos que R$ 14/dia (pouca busca em PB/PE), expanda o local para o Nordeste antes de mexer no CPC. |
-| Orçamento crescer | Ligar o grupo **Landing Pages** primeiro (a partir de ~R$ 25/dia), depois os outros. |
+| Orçamento crescer | Separar o grupo que mais converte numa campanha própria, com orçamento só dele. |
 | Mensal | Ver os recursos com desempenho "Baixo" nos anúncios e trocar esses títulos. |
 
 **Expectativa honesta:** com ~R$ 430/mês e CPC de R$ 2 a R$ 3 (confira no Planejador de

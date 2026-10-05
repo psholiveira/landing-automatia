@@ -26,8 +26,8 @@ const comuns = {
 };
 
 /**
- * Com R$ 100/semana só dá para alimentar 2 grupos. `ativo: false` entra pausado:
- * fica pronto para ligar quando o orçamento crescer.
+ * O orçamento é da campanha, não de cada grupo: o Google gasta onde aparecem buscas.
+ * `ativo: false` entra pausado — use para desligar um serviço que só queima verba.
  */
 export const grupos = [
   {
@@ -66,10 +66,15 @@ export const grupos = [
     ],
   },
   {
-    nome: "Automação de Processos com IA",
-    ativo: false,
-    caminho: ["automacao", "ia"],
+    nome: "Automação para Empresas",
+    ativo: true,
+    caminho: ["automacao", "empresas"],
     palavras: [
+      "automação para empresas",
+      "automação empresarial",
+      "automação de processos",
+      "empresa de automação",
+      "automatizar tarefas repetitivas",
       "automação de processos com ia",
       "automação com inteligência artificial",
       "empresa de automação de processos",
@@ -92,7 +97,7 @@ export const grupos = [
       "IA onde dá retorno de verdade",
       "Entregas semanais funcionando",
       "Sem abandono pós-entrega",
-      "Menos erro, menos retrabalho",
+      "Automação para seu negócio",
       "AutomatIA | Automação com IA",
     ],
     descricoes: [
@@ -104,9 +109,14 @@ export const grupos = [
   },
   {
     nome: "Sistemas e Software Sob Medida",
-    ativo: false,
+    ativo: true,
     caminho: ["sistemas", "sob-medida"],
     palavras: [
+      "desenvolvimento de sistemas",
+      "sistema para empresa",
+      "sistema web para empresa",
+      "empresa de software",
+      "fábrica de software",
       "sistema sob medida",
       "software sob medida",
       "desenvolvimento de software sob medida",
@@ -138,10 +148,15 @@ export const grupos = [
     ],
   },
   {
-    nome: "Landing Pages",
-    ativo: false,
-    caminho: ["landing-page", "conversao"],
+    nome: "Sites e Landing Pages",
+    ativo: true,
+    caminho: ["sites", "landing-page"],
     palavras: [
+      "criação de sites para empresas",
+      "criação de site profissional",
+      "site para empresa",
+      "desenvolvimento de sites",
+      "site institucional",
       "criação de landing page",
       "landing page profissional",
       "landing page para empresa",
@@ -157,12 +172,12 @@ export const grupos = [
       "Copy e design para vender",
       "Carrega rápido no celular",
       "Lead direto no seu WhatsApp",
-      "Com Google Analytics pronto",
-      "Integrada ao seu CRM",
+      "Criação de sites profissionais",
+      "Sites e landing pages",
       "Veja projetos no ar",
       "Sem template genérico",
       "Atualize sem programador",
-      "AutomatIA | Landing pages",
+      "AutomatIA | Sites",
     ],
     descricoes: [
       "Estrutura e copy desenhadas para vender, não para ganhar prêmio de design.",
@@ -220,6 +235,10 @@ export const negativas = [
   // irrelevantes
   "download", "baixar", "apk", "login", "github", "open source", "whatsapp web", "gb whatsapp",
   "clonar", "espionar", "hackear",
+  // armadilhas das palavras gerais: "automação" também é elétrica/industrial/caixa de loja,
+  // e "site" atrai quem quer hospedagem, plataforma pronta ou o mais barato possível
+  "residencial", "industrial", "clp", "automação comercial", "portão", "iluminação",
+  "hospedagem", "domínio", "google sites", "barato", "barata", "99freelas", "workana",
 ];
 
 export const sitelinks = [
