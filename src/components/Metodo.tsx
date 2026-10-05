@@ -30,6 +30,7 @@ export default function Metodo() {
         <Reveal className="mt-10 border-t border-ink/[0.08] pt-10 sm:mt-0">
           <a
             href={contato.whatsapp}
+            data-ga="metodo"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-escuro w-full sm:w-auto"

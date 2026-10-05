@@ -9,7 +9,7 @@ const linkColuna = "text-[16px] text-white/85 transition-colors hover:text-sky s
 
 export default function Footer() {
   const contatos = [
-    { rotulo: `WhatsApp ${contato.telefone}`, href: contato.whatsapp, externo: true },
+    { rotulo: `WhatsApp ${contato.telefone}`, href: contato.whatsapp, externo: true, ga: "rodape-link" },
     { rotulo: contato.email, href: contato.emailHref, externo: false },
     { rotulo: `Instagram ${contato.handle}`, href: contato.instagram, externo: true },
   ];
@@ -52,6 +52,7 @@ export default function Footer() {
                 <li key={c.href}>
                   <a
                     href={c.href}
+                    data-ga={"ga" in c ? c.ga : undefined}
                     {...(c.externo ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     className={linkColuna + " break-all"}
                   >
@@ -68,6 +69,7 @@ export default function Footer() {
             <p className="m-0 mb-5 max-w-[300px] text-[16px] leading-[1.55] text-white/70">{rodape.comeceTexto}</p>
             <a
               href={contato.whatsapp}
+              data-ga="rodape-botao"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-claro"

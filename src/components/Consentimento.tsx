@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleAnalytics, sendGAEvent } from "@next/third-parties/google";
 import BtnConteudo from "./BtnConteudo";
 
 const CHAVE = "consentimento-analytics";
@@ -23,6 +23,17 @@ export default function Consentimento({ gaId }: { gaId: string }) {
     } catch {}
     setEscolha(salvo === "aceito" || salvo === "recusado" ? salvo : null);
   }, []);
+
+  // Um ouvinte só para todos os links do WhatsApp; o data-ga do link diz de onde veio o clique.
+  useEffect(() => {
+    if (escolha !== "aceito") return;
+    function aoClicar(e: MouseEvent) {
+      const link = (e.target as Element).closest<HTMLAnchorElement>('a[href*="wa.me"]');
+      if (link) sendGAEvent("event", "clique_whatsapp", { botao: link.dataset.ga ?? "outro" });
+    }
+    document.addEventListener("click", aoClicar);
+    return () => document.removeEventListener("click", aoClicar);
+  }, [escolha]);
 
   function escolher(valor: "aceito" | "recusado") {
     try {

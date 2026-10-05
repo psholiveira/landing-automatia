@@ -30,6 +30,7 @@ export default function Segmentos() {
                 </div>
                 <a
                   href={whatsappCom(s.mensagem)}
+                  data-ga={`segmento: ${s.nome}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-7 flex items-center gap-2.5 border-t border-ink/[0.08] pt-5 text-[15px] font-medium text-navy transition-colors hover:text-brand"

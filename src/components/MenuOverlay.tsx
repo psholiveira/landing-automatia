@@ -217,12 +217,13 @@ export default function MenuOverlay({
             </div>
             <div className="flex flex-col items-start gap-2 text-[14px] sm:items-end sm:text-[15px]">
               {[
-                { href: contato.whatsapp, rotulo: `WhatsApp ${contato.telefone}` },
+                { href: contato.whatsapp, rotulo: `WhatsApp ${contato.telefone}`, ga: "menu" },
                 { href: contato.instagram, rotulo: `Instagram ${contato.handle}` },
               ].map((c) => (
                 <a
                   key={c.href}
                   href={c.href}
+                  data-ga={"ga" in c ? c.ga : undefined}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group flex items-center gap-1.5 whitespace-nowrap text-white transition-colors hover:text-sky"

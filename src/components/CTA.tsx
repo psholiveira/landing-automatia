@@ -27,6 +27,7 @@ export default function CTA() {
         <Reveal className="mt-10 flex w-full flex-col items-center gap-3 sm:mt-12">
           <a
             href={contato.whatsapp}
+            data-ga="contato"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-claro w-full sm:w-auto"

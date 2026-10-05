@@ -31,6 +31,7 @@ export default function Agentes() {
             <Reveal>
               <a
                 href={contato.whatsapp}
+                data-ga="agentes"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-escuro w-full sm:w-auto"
