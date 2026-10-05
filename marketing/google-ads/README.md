@@ -13,22 +13,23 @@ node marketing/google-ads/campanha.mjs   # confere os limites do Google Ads e re
 | --- | --- | --- |
 | Tipo | Pesquisa (só Rede de Pesquisa do Google) | Pega quem já está procurando a solução. Display, Parceiros de Pesquisa e Performance Max queimam verba pequena com tráfego frio. |
 | Objetivo | Leads → clique no WhatsApp | É a única conversão do site. |
-| Orçamento | R$ 50/dia (~R$ 1.500/mês) | Suficiente para 5 grupos aprenderem em 30 dias. Abaixo de R$ 30/dia, corte para 2–3 grupos. |
-| Lances | **Maximizar cliques** com CPC máx. de R$ 6 nas 3–4 primeiras semanas → **Maximizar conversões** quando passar de ~15 conversões em 30 dias | Sem histórico de conversão, o lance automático por conversão fica às cegas. |
-| Local | Brasil, opção **"Presença"** (pessoas *no* local, não "interessadas") | O serviço é remoto. Se o CPC vier alto, restrinja ao Nordeste (onde estão os cases) e expanda depois. |
+| Orçamento | **R$ 100/semana → R$ 14/dia** (~R$ 430/mês) | O Google só aceita orçamento diário. Em alguns dias ele gasta até o dobro, mas compensa nos outros: no mês, nunca passa de 30,4 × R$ 14. |
+| Foco | **Só 2 grupos ativos**: Chatbot WhatsApp e Clínicas | Com R$ 14/dia, mais grupos dividem a verba em migalhas e nenhum junta dados. Os dois vendem a mesma coisa (agente de IA no WhatsApp), que é o carro-chefe do site. Os outros 3 grupos já vão no CSV, **pausados**, para ligar quando o orçamento crescer. |
+| Lances | **Maximizar cliques** com CPC máx. de **R$ 3** | Acima disso, um clique come 1/5 do dia. Com esse volume é difícil chegar às ~15 conversões/mês que o "Maximizar conversões" precisa — só troque se chegar lá. |
+| Local | **Paraíba e Pernambuco**, opção **"Presença"** (pessoas *no* local, não "interessadas") | Orçamento pequeno pede área pequena: CPC menor que em SP, e é onde estão os cases (João Pessoa e Recife) e o DDD 83. Expanda para o Nordeste quando sobrar verba. |
 | Idioma | Português | |
-| Horário | Seg–sex 8h–20h, sáb 8h–13h | Concentra a verba quando alguém responde o WhatsApp rápido. Se o agente de IA atende 24/7, libere todos os horários. |
-| Correspondência | Frase + exata nas principais | Ampla só depois de ter conversões e lances inteligentes. |
+| Horário | Seg–sex 8h–19h | Concentra a pouca verba no horário comercial, quando quem decide está procurando e alguém responde o WhatsApp na hora. |
+| Correspondência | Frase + exata nas principais | Nada de correspondência ampla: com verba pequena, ela gasta tudo em buscas tortas. |
 
 ### Grupos de anúncios
 
-| Grupo | Exemplos de palavras-chave | Ticket / intenção |
-| --- | --- | --- |
-| Chatbot WhatsApp e Agentes de IA | chatbot para whatsapp, agente de ia para atendimento | Principal: é o carro-chefe do site |
-| Automação de Processos com IA | automação de processos com ia, integração whatsapp com crm | Alto ticket, volume menor |
-| Sistemas e Software Sob Medida | sistema sob medida, empresa de desenvolvimento de software | Alto ticket, CPC mais caro |
-| Landing Pages | criação de landing page, landing page profissional | Ticket menor, venda mais fácil — porta de entrada |
-| Clínicas e Consultórios | chatbot para clínica, agendamento automático whatsapp | Nicho com dor clara e intenção alta |
+| Grupo | Status | Exemplos de palavras-chave | Ticket / intenção |
+| --- | --- | --- | --- |
+| Chatbot WhatsApp e Agentes de IA | **Ativo** | chatbot para whatsapp, agente de ia para atendimento | Principal: é o carro-chefe do site |
+| Clínicas e Consultórios | **Ativo** | chatbot para clínica, agendamento automático whatsapp | Nicho com dor clara, intenção alta e menos concorrência |
+| Landing Pages | Pausado | criação de landing page, landing page profissional | Próximo a ligar: ticket menor, venda mais fácil |
+| Automação de Processos com IA | Pausado | automação de processos com ia, integração whatsapp com crm | Alto ticket, volume menor |
+| Sistemas e Software Sob Medida | Pausado | sistema sob medida, empresa de desenvolvimento de software | CPC caro demais para R$ 14/dia |
 
 Cada grupo tem 1 anúncio responsivo com 15 títulos e 4 descrições. Três títulos são comuns a
 todos: *Diagnóstico gratuito de 30 min*, *Preço e prazo fechados*, *Fale com quem constrói*.
@@ -56,7 +57,7 @@ O site já manda o evento `clique_whatsapp` para o GA4 (`G-ZK74CTXMD0`) em todo 
 1. Instale o [Google Ads Editor](https://ads.google.com/intl/pt-BR_br/home/tools/ads-editor/) e baixe a conta.
 2. **Conta → Importar → De arquivo**, nesta ordem: `1-campanha.csv`, `2-grupos.csv`,
    `3-palavras-chave.csv`, `4-anuncios.csv`. Revise cada importação antes de aceitar.
-3. Na campanha, ajuste o que o CSV não cobre: **local** (Brasil, "Presença"), **programação de horário**
+3. Na campanha, ajuste o que o CSV não cobre: **local** (Paraíba e Pernambuco, "Presença"), **programação de horário** (seg–sex 8h–19h)
    e desmarque **Parceiros de Pesquisa** e **Rede de Display** se aparecerem marcados.
 4. Publique. A campanha entra **pausada** de propósito — ative só depois de conferir tudo.
 
@@ -80,7 +81,8 @@ Crie no nível da campanha (os textos já estão validados em `campanha.mjs`):
 
 - [ ] Conversão `Lead - WhatsApp` importada e marcada como principal
 - [ ] Faturamento configurado e verificação do anunciante iniciada
-- [ ] Local "Presença", só Rede de Pesquisa, idioma português
+- [ ] Orçamento R$ 14/dia, CPC máx. R$ 3, só os grupos Chatbot e Clínicas ativos
+- [ ] Local Paraíba + Pernambuco ("Presença"), só Rede de Pesquisa, idioma português
 - [ ] Revisar as promessas usadas nos anúncios: "1ª entrega em até 2 semanas", "Resposta em 30 segundos", "Orçamento em 2 minutos" (o README do site já pede essa revisão)
 - [ ] Alguém pronto para responder o WhatsApp rápido nos horários da campanha
 
@@ -88,16 +90,18 @@ Crie no nível da campanha (os textos já estão validados em `campanha.mjs`):
 
 | Quando | O quê |
 | --- | --- |
-| Dias 1–14, a cada 2–3 dias | **Termos de pesquisa**: negativar tudo que não é cliente (estudante, DIY, ferramenta grátis). É o que mais economiza verba. |
-| Semanal | Anotar numa planilha as conversas do WhatsApp que vieram do Google (pergunte "como nos achou?"), quantas viraram reunião e quantas fecharam. Comparar com o custo da semana. |
-| Semana 3–4 | Pausar palavras-chave com 100+ cliques e nenhuma conversa. Mover verba para os grupos que trazem conversa. |
-| ~15 conversões em 30 dias | Trocar para **Maximizar conversões**. Com 30+, testar CPA desejado. |
+| Dias 1–14, a cada 2–3 dias | **Termos de pesquisa**: negativar tudo que não é cliente (estudante, DIY, ferramenta grátis). Com R$ 14/dia, cada clique errado pesa — é o que mais economiza verba. |
+| Semanal | Anotar numa planilha as conversas do WhatsApp que vieram do Google (pergunte "como nos achou?"), quantas viraram reunião e quantas fecharam. Comparar com os R$ 100 da semana. |
+| Semana 4–6 | Palavra-chave com 30+ cliques e nenhuma conversa: pausar. Se um dos dois grupos não trouxe conversa nenhuma, passe a verba toda para o outro. |
+| Se a verba não gastar | Se a campanha gastar bem menos que R$ 14/dia (pouca busca em PB/PE), expanda o local para o Nordeste antes de mexer no CPC. |
+| Orçamento crescer | Ligar o grupo **Landing Pages** primeiro (a partir de ~R$ 25/dia), depois os outros. |
 | Mensal | Ver os recursos com desempenho "Baixo" nos anúncios e trocar esses títulos. |
 
-**Expectativa honesta:** com R$ 1.500/mês e CPC na faixa de alguns reais (confira no Planejador
-de Palavras-chave antes de ativar — "software sob medida" tende a ser bem mais caro que
-"chatbot para clínica"), algo como 200–500 cliques e, se a página converter 3–8%, de 6 a 40 conversas por mês.
-O primeiro mês é de aprendizado; avalie pelo custo por *reunião*, não por clique.
+**Expectativa honesta:** com ~R$ 430/mês e CPC de R$ 2 a R$ 3 (confira no Planejador de
+Palavras-chave antes de ativar), são algo como 140–215 cliques e, se a página converter 3–8%,
+de 4 a 17 conversas por mês. É pouco dado para conclusões rápidas: dê 6 semanas antes de
+julgar, e avalie pelo custo por *reunião*, não por clique. Com tão pouco tráfego, cada visita
+conta — por isso o botão de WhatsApp no topo do site (abaixo) pesa ainda mais.
 
 ## O que melhorar no site para a campanha render
 

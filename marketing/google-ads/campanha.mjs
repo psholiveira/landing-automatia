@@ -13,8 +13,11 @@ const SITE = "https://www.automatia.company/";
 
 export const campanha = {
   nome: "Pesquisa | AutomatIA | Leads WhatsApp",
-  orcamentoDiario: 50, // R$
-  cpcMaximo: 6, // R$ — teto do "Maximizar cliques" nas primeiras semanas
+  orcamentoSemanal: 100, // R$
+  // O Google trabalha com orçamento diário: 100 / 7 ≈ 14. Em dias bons ele pode gastar até 2x,
+  // mas no mês o total não passa de 30,4 x o diário (~R$ 430).
+  orcamentoDiario: 14, // R$
+  cpcMaximo: 3, // R$ — teto do "Maximizar cliques"; acima disso um clique come 1/5 do dia
 };
 
 /** Valem para todos os grupos. */
@@ -22,21 +25,23 @@ const comuns = {
   titulos: ["Diagnóstico gratuito de 30 min", "Preço e prazo fechados", "Fale com quem constrói"],
 };
 
+/**
+ * Com R$ 100/semana só dá para alimentar 2 grupos. `ativo: false` entra pausado:
+ * fica pronto para ligar quando o orçamento crescer.
+ */
 export const grupos = [
   {
     nome: "Chatbot WhatsApp e Agentes de IA",
+    ativo: true,
     caminho: ["chatbot", "whatsapp"],
     palavras: [
       "chatbot para whatsapp",
       "chatbot whatsapp para empresa",
-      "chatbot com inteligência artificial",
       "agente de ia para atendimento",
       "agente de ia whatsapp",
       "atendimento automatizado whatsapp",
       "automatizar atendimento whatsapp",
       "atendente virtual whatsapp",
-      "bot para whatsapp business",
-      "ia para atendimento ao cliente",
     ],
     exatas: ["chatbot para whatsapp", "agente de ia para atendimento"],
     titulos: [
@@ -62,6 +67,7 @@ export const grupos = [
   },
   {
     nome: "Automação de Processos com IA",
+    ativo: false,
     caminho: ["automacao", "ia"],
     palavras: [
       "automação de processos com ia",
@@ -98,6 +104,7 @@ export const grupos = [
   },
   {
     nome: "Sistemas e Software Sob Medida",
+    ativo: false,
     caminho: ["sistemas", "sob-medida"],
     palavras: [
       "sistema sob medida",
@@ -132,6 +139,7 @@ export const grupos = [
   },
   {
     nome: "Landing Pages",
+    ativo: false,
     caminho: ["landing-page", "conversao"],
     palavras: [
       "criação de landing page",
@@ -165,6 +173,7 @@ export const grupos = [
   },
   {
     nome: "Clínicas e Consultórios",
+    ativo: true,
     caminho: ["clinicas", "agendamento"],
     palavras: [
       "chatbot para clínica",
@@ -298,7 +307,7 @@ writeFileSync(
   join(pasta, "2-grupos.csv"),
   csv([
     ["Campaign", "Ad Group", "Max CPC", "Ad Group Status"],
-    ...grupos.map((g) => [campanha.nome, g.nome, campanha.cpcMaximo, "Enabled"]),
+    ...grupos.map((g) => [campanha.nome, g.nome, campanha.cpcMaximo, g.ativo ? "Enabled" : "Paused"]),
   ]),
 );
 
@@ -333,5 +342,9 @@ writeFileSync(
   ]),
 );
 
-const total = grupos.reduce((n, g) => n + g.palavras.length + g.exatas.length, 0);
-console.log(`OK: ${grupos.length} grupos, ${total} palavras-chave, ${negativas.length} negativas, CSVs em ${pasta}`);
+const ativos = grupos.filter((g) => g.ativo);
+const total = ativos.reduce((n, g) => n + g.palavras.length + g.exatas.length, 0);
+console.log(
+  `OK: ${ativos.length} grupos ativos (${grupos.length - ativos.length} pausados), ${total} palavras-chave ativas, ` +
+    `${negativas.length} negativas, R$ ${campanha.orcamentoDiario}/dia. CSVs em ${pasta}`,
+);
